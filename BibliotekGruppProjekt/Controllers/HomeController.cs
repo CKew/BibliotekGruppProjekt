@@ -8,10 +8,13 @@ using BibliotekGruppProjekt.Models;
 
 namespace BibliotekGruppProjekt.Controllers
 {
+    // Test
+
     public class HomeController : Controller
     {
         public IActionResult Index()
         {
+            
             return View();
         }
 
