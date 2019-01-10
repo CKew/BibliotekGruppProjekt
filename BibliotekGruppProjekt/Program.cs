@@ -12,11 +12,13 @@ namespace BibliotekGruppProjekt
 {
     public class Program
     {
+        // Program happens first when code runs
         public static void Main(string[] args)
         {
             CreateWebHostBuilder(args).Build().Run();
         }
 
+        // Here it jumps to startup.cs
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
