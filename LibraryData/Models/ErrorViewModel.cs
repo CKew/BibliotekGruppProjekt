@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BibliotekGruppProjekt.Models
+namespace LibraryData.Models
 {
     public class ErrorViewModel
     {
