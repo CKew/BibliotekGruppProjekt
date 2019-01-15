@@ -12,7 +12,7 @@ namespace LibraryData.Models
         [Required]
         public DateTime Checkout { get; set; }
 
-        public DateTime Returned { get; set; }
+        public DateTime? Returned { get; set; }
 
         [Required]
         public Book Book { get; set; }
