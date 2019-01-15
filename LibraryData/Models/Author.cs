@@ -11,10 +11,6 @@ namespace LibraryData.Models
 
         [Required]
         public string Name { get; set; }
-
-        [Required]
-        [Range(0,int.MaxValue)]
-        public Book Books { get; set; }
         
     }
 }

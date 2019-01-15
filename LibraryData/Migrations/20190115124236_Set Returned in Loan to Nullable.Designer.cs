@@ -4,14 +4,16 @@ using LibraryData;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LibraryData.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    partial class LibraryContextModelSnapshot : ModelSnapshot
+    [Migration("20190115124236_Set Returned in Loan to Nullable")]
+    partial class SetReturnedinLoantoNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,7 +53,8 @@ namespace LibraryData.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("AuthorID");
+                    b.HasIndex("AuthorID")
+                        .IsUnique();
 
                     b.ToTable("Books");
                 });
@@ -117,8 +120,8 @@ namespace LibraryData.Migrations
             modelBuilder.Entity("LibraryData.Models.Book", b =>
                 {
                     b.HasOne("LibraryData.Models.Author", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorID")
+                        .WithOne("Books")
+                        .HasForeignKey("LibraryData.Models.Book", "AuthorID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

@@ -1,0 +1,46 @@
+﻿ - FIX LOAN BRANCH VIEWS.
+
+ - CREATE BRANCHES FOR: BOOKS, AUTHORS.
+
+ SQL CODE:
+
+ INSERT INTO 
+Books(ISBN, Title, [Description], AuthorID) 
+VALUES
+('8345', 'Moby Dick', 'Handlar om en stor Val och en beslutsam sjömann', 1),
+('8345', 'Divkovic Självbiografi', 'Om en beslutsam man på ett uppdrag att lära sig datorernas inre', 2),
+('8345', 'Frankensteins Monster', 'Om ett experiment som slutade i en ny mänsklig skapelse. Monster eller människa?', 3)
+SELECT * FROM Books
+
+INSERT INTO
+Authors(Name)
+VALUES
+('Herman Melville'),
+('Divkovic'),
+('Mary Shelley')
+
+SELECT * FROM Authors
+
+INSERT INTO
+Members(PersonNr, [Name])
+VALUES
+(88, 'Leo'),
+(89, 'Carl'),
+(87, 'Jakob')
+SELECT * FROM Members
+
+INSERT INTO 
+Loans(Checkout, Returned, BookID, MemberID)
+VALUES
+('12/20/2018',null,6 ,1),
+('11/26/2018', null,7 ,2),
+('12/11/2018', null,8 ,3)
+SELECT * FROM Loans
+
+INSERT INTO 
+BookCopies(BooksID)
+VALUES
+(6),
+(7),
+(8)
+SELECT * FROM BookCopies
