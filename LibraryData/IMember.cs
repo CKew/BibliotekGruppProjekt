@@ -7,8 +7,11 @@ namespace LibraryData
 {
     public interface IMember
     {
+        // Gets the member by id
         Member GetMember(int id);
+        // Lists all the members
         IEnumerable<Member> GetAll();
+        // Adds the new member
         void Add(Member newMember);
 
         //IEnumerable<CheckoutHistory> GetCheckoutHistory(int memberId);

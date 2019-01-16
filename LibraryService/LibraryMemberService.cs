@@ -16,16 +16,19 @@ namespace LibraryService
             _context = context;
         }
 
+        // Gets a specific member
         public Member GetMember(int id){
             return _context.Members.FirstOrDefault(m => m.ID == id);
         }
 
+        // Gets all the members
         public IEnumerable<Member> GetAll(){
             return _context.Members;
                 //.Include(member => member.PersonNr)
                 //.Include(member => member.ID);
         }
 
+        // Adds a new member
         public void Add(Member newMember){
             _context.Add(newMember);
             _context.SaveChanges();

@@ -17,6 +17,7 @@ namespace BibliotekGruppProjekt.Controllers
             _bookService = bookService;
         }
 
+        // Gets all the books and returns it
         public IActionResult Index()
         {
             var allBooks = _bookService.GetAll();
@@ -28,6 +29,7 @@ namespace BibliotekGruppProjekt.Controllers
             return View(model);
         }
 
+        // Retrieves specific book and returns the information regarding it
         public IActionResult Detail(int Id)
         {
             var book = _bookService.GetBook(Id);

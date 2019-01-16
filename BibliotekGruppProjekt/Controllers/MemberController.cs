@@ -17,6 +17,7 @@ namespace BibliotekGruppProjekt.Controllers
             _memberService = member;
         }
 
+        // Gets all the members created and returns it
         public IActionResult Index()
         {
             var allMembers = _memberService.GetAll();
@@ -36,6 +37,7 @@ namespace BibliotekGruppProjekt.Controllers
 
         }
 
+        // Retrieves the specific member and returns information regarding that user
         public IActionResult Detail(int ID)
         {
             var member = _memberService.GetMember(ID);

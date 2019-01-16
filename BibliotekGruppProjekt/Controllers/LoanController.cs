@@ -18,6 +18,7 @@ namespace BibliotekGruppProjekt.Controllers
             _loanService = loans;
         }
 
+        // Gets all the loans and returns it
         public IActionResult Index()
         {
             var allLoans = _loanService.GetAll();
@@ -28,6 +29,7 @@ namespace BibliotekGruppProjekt.Controllers
             return View(model);
         }
 
+        // Retrieves a loan of a specific member and returns it
         public IActionResult Detail(int ID)
         {
             var member = _loanService.GetMember(ID);
