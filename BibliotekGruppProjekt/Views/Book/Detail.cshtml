@@ -1,5 +1,27 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model BibliotekGruppProjekt.Models.BookCatalog.BookDetailModel;
+
+<div class="container">
+    <div class="header clearfix detailHeading">
+        <h2 class="text-muted">Book Information</h2>
+    </div>
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-md-4">
+                <div>
+                    <h2>@Model.Title</h2>
+                    <table>
+                       <tr>
+                           <td>Description: @Model.Description</td>
+                           <td>Author: @Model.Author</td>
+                           <td>ISBN: @Model.ISBN</td>
+                           <td>BookCopies: @Model.BookCopy</td>
+                       </tr>
+                    </table>
+                </div>
+            </div>
+            <!--<div class="col-md-4">
+                <h4>Assets currently on loan</h4>
+            </div>-->
+        </div>
+    </div>
+</div>
