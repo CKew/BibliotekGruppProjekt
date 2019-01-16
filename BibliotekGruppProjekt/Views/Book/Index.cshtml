@@ -1,0 +1,36 @@
+﻿@model BibliotekGruppProjekt.Models.BookCatalog.BookIndexModel;
+
+<div id="books">
+    <h3></h3>
+    <div id="booksTable">
+        <table>
+            <thead>
+                <tr>
+                    <th>Author: </th>
+                    <th>Title: </th>
+                    <th>Description: </th>
+                    <th>ISBN: </th>
+                    <th>BookCopies: </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var book in Model.Books)
+                {
+                    <tr class="bookrow">
+                        @*<td class="loanrow">
+                                <a asp-controller="Loan" asp-action=">Index" asp-route-id="@loan.ID">
+
+                                </a>
+                            </td>*@
+                        <td class="">@book.Author</td>
+                        <td class="">@book.Title</td>
+                        <td class="">@book.Description</td>
+                        <td class="">@book.ISBN</td>
+                        <td class="">@book.BookCopies</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

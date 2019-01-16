@@ -1,7 +1,12 @@
 ﻿ - FIX LOAN BRANCH VIEWS. FIXED! (Buggy... But it reaches the end destination!)
 
- - CREATE BRANCHES FOR: BOOKS, AUTHORS.
+ - CREATE BRANCHES FOR: AUTHORS.
 
+ - Fix the Fees and logic connecting all the data.
+
+ - Fix a way for books to be available or not.(Ex. When Loaned set to NotAvailable and vice versa)
+
+ - Fix the Detail.cshtml Viewfiles for Loan and Book.
 
 
  SQL CODE:

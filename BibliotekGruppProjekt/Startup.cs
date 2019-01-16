@@ -42,6 +42,8 @@ namespace BibliotekGruppProjekt
 
             services.AddScoped<ILoan, LibraryLoanService>();
 
+            services.AddScoped<IBook, LibraryBookService>();
+
             services.AddDbContext<LibraryContext>(options
                 => options.UseSqlServer(Configuration.GetConnectionString("LibraryConnection")));
         }
