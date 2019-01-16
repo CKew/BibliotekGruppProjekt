@@ -46,12 +46,12 @@ namespace LibraryService
         }
 
         // Shows all loans of a specified member
-        public IEnumerable<Loan> ShowMemberLoans(int id)
+        public Member GetMember(int id)
         {
             // return _context.Members.FirstOrDefault(m => m.ID == id).Loans;
             Member member = _context.Members.FirstOrDefault(m => m.ID == id);
 
-            return member.Loans;
+            return member;
         }
 
         // Checks how many days the book has been loaned and if the book has been delayed

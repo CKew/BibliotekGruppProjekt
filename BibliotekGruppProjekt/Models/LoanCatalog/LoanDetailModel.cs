@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BibliotekGruppProjekt.Models.LoanCatalog
 {
-    public class LoanIndexListingModel
+    public class LoanDetailModel
     {
         public int ID { get; set; }
         public Book Book { get; set; }

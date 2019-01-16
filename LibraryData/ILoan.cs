@@ -8,7 +8,7 @@ namespace LibraryData
     public interface ILoan
     {
         IEnumerable<Loan> GetAll();
-        IEnumerable<Loan> ShowMemberLoans(int id);
+        Member GetMember(int id);
             
         void AddLoan(Loan loan);
         void RemoveLoan(int memberID , int loanID);

@@ -35,8 +35,13 @@ namespace BibliotekGruppProjekt
             });
 
 
+            services.AddSingleton(Configuration);
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddScoped<IMember, LibraryMemberService>();
+
+            services.AddScoped<ILoan, LibraryLoanService>();
+
             services.AddDbContext<LibraryContext>(options
                 => options.UseSqlServer(Configuration.GetConnectionString("LibraryConnection")));
         }

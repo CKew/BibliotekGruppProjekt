@@ -1,6 +1,8 @@
-﻿ - FIX LOAN BRANCH VIEWS.
+﻿ - FIX LOAN BRANCH VIEWS. FIXED! (Buggy... But it reaches the end destination!)
 
  - CREATE BRANCHES FOR: BOOKS, AUTHORS.
+
+
 
  SQL CODE:
 
