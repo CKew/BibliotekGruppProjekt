@@ -15,17 +15,18 @@
             <tbody>
                 @foreach (var loan in Model.Loans)
                 {
-                    <tr class="loanrow">
-                        @*<td class="loanrow">
-                            <a asp-controller="Loan" asp-action=">Index" asp-route-id="@loan.ID">
+                <tr class="loanrow">
+                    @*<td class="loanrow">
+            <a asp-controller="Loan" asp-action=">Index" asp-route-id="@loan.ID">
 
-                            </a>
-                        </td>*@
-                        <td class="">@loan.Member.Name</td>
-                        <td class="">@loan.Book.Title</td>
-                        <td class="">@loan.Checkout</td>
-                        <td class="">@loan.Returned</td>
-                    </tr>
+            </a>
+        </td>*@
+                    <td><a asp-controller="Loan" asp-action="Detail" asp-route-id="@loan.ID">(Details)</a></td>
+                    <td class="">@loan.Member.Name</td>
+                    <td class="">@loan.Book.Title</td>
+                    <td class="">@loan.Checkout</td>
+                    <td class="">@loan.Returned</td>
+                </tr>
                 }
             </tbody>
         </table>
