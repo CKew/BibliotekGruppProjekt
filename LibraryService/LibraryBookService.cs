@@ -20,6 +20,7 @@ namespace LibraryService
 
         public void AddBook(Book book)
         {
+            book.Author = _context.Authors.Find(book.Author.ID);
             _context.Add(book);
             _context.SaveChanges();
         }
@@ -41,10 +42,19 @@ namespace LibraryService
         // No way yet to check if book available or not
         public IEnumerable<Book> GetAvailable()
         {
+            return _context.Books
+                .Include("Author")
+                .Include(x => x.BookCopies)
+                .ToList()
+                .Where(x => IsAvailable(x));
+        }
+
+        private bool IsAvailable(Book book)
+        {
             throw new NotImplementedException();
         }
 
-        public Book GetBook(int bookId)
+        public Book GetBook(int? bookId)
         {
             var book = _context.Books.FirstOrDefault(b => b.ID == bookId);
 
@@ -62,6 +72,27 @@ namespace LibraryService
             var authorBooks = _context.Books.Where(a => a.Author == author);
 
             return authorBooks;
+        }
+
+        public void Update(Book book)
+        {
+            _context.Update(book);
+            _context.SaveChanges();
+        }
+
+        public bool BookExists(int id)
+        {
+            return _context.Books.Any(e => e.ID == id);
+        }
+
+        public void Delete(int id)
+        {
+            var book = _context.Books.Find(id);
+            var bookCopies = _context.BookCopies
+                .Where(x => x.Books == book);
+            _context.BookCopies.RemoveRange(bookCopies);
+            _context.Books.Remove(book);
+            _context.SaveChanges();
         }
     }
 }
