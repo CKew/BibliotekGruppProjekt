@@ -11,20 +11,24 @@ namespace BibliotekGruppProjekt.Controllers
     public class BookController : Controller
     {
         private IBook _bookService;
+        private IAuthor _authorService;
 
-        public BookController(IBook bookService)
+        public BookController(IBook bookService, IAuthor authorService)
         {
             _bookService = bookService;
+            _authorService = authorService;
         }
 
         // Gets all the books and returns it
         public IActionResult Index()
         {
             var allBooks = _bookService.GetAll();
+            var allAuthors = _authorService.GetSelectListItems();
 
             var model = new BookIndexModel();
 
             model.Books = allBooks;
+            model.Authors = allAuthors;
 
             return View(model);
         }

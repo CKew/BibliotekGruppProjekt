@@ -12,5 +12,6 @@ namespace LibraryData.Models
         [Required]
         public string Name { get; set; }
         
+        public virtual ICollection<Book> AuthorBooks { get; set; }
     }
 }
