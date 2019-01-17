@@ -1,4 +1,5 @@
 ﻿using LibraryData;
+using LibraryData.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
@@ -16,16 +17,21 @@ namespace LibraryService
             _context = context;
         }
 
-        public IEnumerable<SelectListItem> GetSelectListItems()
+        // Adds a new author to the database.
+        public void AddAuthor(Author author)
         {
-            return _context.Authors
-                .ToList()
-                .OrderBy(x => x.Name)
-                .Select(x => new SelectListItem
-                {
-                    Text = $"{x.Name}",
-                    Value = x.ID.ToString()
-                });
+            _context.Add(author);
+            _context.SaveChanges();
+        }
+
+        // Returns all the books by a specified author.
+        public IEnumerable<Book> GetAllBooksFromAuthor(int authorId)
+        {
+            var author = _context.Authors.FirstOrDefault(x => x.ID == authorId);
+
+            var authorBooks = _context.Books.Where(x => x.Author == author);
+
+            return authorBooks;
         }
     }
 }

@@ -12,26 +12,27 @@ namespace LibraryService
     {
         private LibraryContext _context;
 
-        public LibraryMemberService(LibraryContext context){
+        public LibraryMemberService(LibraryContext context)
+        {
             _context = context;
         }
 
-        // Gets a specific member
-        public Member GetMember(int id){
-            return _context.Members.FirstOrDefault(m => m.ID == id);
+        // Returns all the loans of a specified member.
+        public IEnumerable<Loan> GetLoans(int memberId)
+        {
+            var member = _context.Members.FirstOrDefault(x => x.ID == memberId);
+
+            var memberLoans = _context.Loans.Where(x => x.Member == member);
+
+            return memberLoans;
         }
 
-        // Gets all the members
-        public IEnumerable<Member> GetAll(){
-            return _context.Members;
-                //.Include(member => member.PersonNr)
-                //.Include(member => member.ID);
-        }
-
-        // Adds a new member
-        public void Add(Member newMember){
-            _context.Add(newMember);
+        // Adds a member to the database.
+        public void AddMember(Member member)
+        {
+            _context.Add(member);
             _context.SaveChanges();
         }
+
     }
 }

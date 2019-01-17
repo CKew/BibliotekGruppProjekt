@@ -12,6 +12,5 @@ namespace BibliotekGruppProjekt.Models.BookCatalog
         public IEnumerable<Book> Books { get; set; }
         public IEnumerable<SelectListItem> Authors { get; set; }
 
-        public Author Author { get; set; } = new Author();
     }
 }

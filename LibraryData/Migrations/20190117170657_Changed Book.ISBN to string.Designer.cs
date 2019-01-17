@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryData.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    [Migration("20190114104552_Member Test Migration")]
-    partial class MemberTestMigration
+    [Migration("20190117170657_Changed Book.ISBN to string")]
+    partial class ChangedBookISBNtostring
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,8 +27,7 @@ namespace LibraryData.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name")
-                        .IsRequired();
+                    b.Property<string>("Name");
 
                     b.HasKey("ID");
 
@@ -41,20 +40,17 @@ namespace LibraryData.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AuthorID");
+                    b.Property<int?>("AuthorID");
 
                     b.Property<string>("Description");
 
-                    b.Property<int>("ISBN");
+                    b.Property<string>("ISBN");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(30);
+                    b.Property<string>("Title");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("AuthorID")
-                        .IsUnique();
+                    b.HasIndex("AuthorID");
 
                     b.ToTable("Books");
                 });
@@ -65,11 +61,13 @@ namespace LibraryData.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("BooksID");
+                    b.Property<int?>("BookID");
+
+                    b.Property<bool>("Status");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("BooksID");
+                    b.HasIndex("BookID");
 
                     b.ToTable("BookCopies");
                 });
@@ -80,17 +78,17 @@ namespace LibraryData.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BookID");
+                    b.Property<int?>("BookCopyID");
 
                     b.Property<DateTime>("Checkout");
 
-                    b.Property<int>("MemberID");
+                    b.Property<int?>("MemberID");
 
-                    b.Property<DateTime>("Returned");
+                    b.Property<DateTime?>("Returned");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("BookID");
+                    b.HasIndex("BookCopyID");
 
                     b.HasIndex("MemberID");
 
@@ -103,46 +101,38 @@ namespace LibraryData.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name")
-                        .IsRequired();
+                    b.Property<string>("Name");
 
                     b.Property<int>("PersonNr");
 
                     b.HasKey("ID");
 
                     b.ToTable("Members");
-
-                    b.HasData(
-                        new { ID = 1, Name = "Leo", PersonNr = 1 }
-                    );
                 });
 
             modelBuilder.Entity("LibraryData.Models.Book", b =>
                 {
                     b.HasOne("LibraryData.Models.Author", "Author")
-                        .WithOne("Books")
-                        .HasForeignKey("LibraryData.Models.Book", "AuthorID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithMany("Books")
+                        .HasForeignKey("AuthorID");
                 });
 
             modelBuilder.Entity("LibraryData.Models.BookCopy", b =>
                 {
-                    b.HasOne("LibraryData.Models.Book", "Books")
+                    b.HasOne("LibraryData.Models.Book", "Book")
                         .WithMany("BookCopies")
-                        .HasForeignKey("BooksID");
+                        .HasForeignKey("BookID");
                 });
 
             modelBuilder.Entity("LibraryData.Models.Loan", b =>
                 {
-                    b.HasOne("LibraryData.Models.Book", "Book")
+                    b.HasOne("LibraryData.Models.BookCopy", "BookCopy")
                         .WithMany()
-                        .HasForeignKey("BookID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("BookCopyID");
 
                     b.HasOne("LibraryData.Models.Member", "Member")
                         .WithMany("Loans")
-                        .HasForeignKey("MemberID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("MemberID");
                 });
 #pragma warning restore 612, 618
         }

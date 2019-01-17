@@ -8,13 +8,10 @@ namespace LibraryData
     public interface ILoan
     {
         IEnumerable<Loan> GetAll();
-        Member GetMember(int id);
+        IEnumerable<Loan> GetFromMember(int memberId);
             
-        void AddLoan(Loan loan);
-        void RemoveLoan(int memberID , int loanID);
-        
-        TimeSpan DaysLoaned(DateTime startDate);
-        int Fee();
-        bool DelayedLoan(bool delayed);
+        void AddLoan(int memberId, int bookCopyId);
+        void ReturnLoan(int memberID , int bookCopyId);
+
     }
 }

@@ -9,13 +9,10 @@ namespace LibraryData.Models
     {
         public int ID { get; set; }
 
-        [Required]
         public int PersonNr { get; set; }
 
-        [Required]
         public string Name { get; set; }
 
-        [Range(0,int.MaxValue)]
         public IEnumerable<Loan> Loans { get; set; }
 
     }

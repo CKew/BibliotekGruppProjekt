@@ -9,15 +9,12 @@ namespace LibraryData.Models
     {
         public int ID { get; set; }
 
-        [Required]
         public DateTime Checkout { get; set; }
 
         public DateTime? Returned { get; set; }
 
-        [Required]
-        public Book Book { get; set; }
+        public BookCopy BookCopy { get; set; }
 
-        [Required]
         public Member Member { get; set; }
     }
 }

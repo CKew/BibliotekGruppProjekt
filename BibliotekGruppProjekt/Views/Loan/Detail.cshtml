@@ -11,7 +11,7 @@
                     <h2>@Model.Member</h2>
                     <table>
                         <tr>Book on Loan: @Model.Book</tr>
-                        <tr>Loaned since: @Model.Checkout</tr>
+                        <tr>Loaned since: @Model.Checkout.ToString("MM/dd/yyyy")</tr>
                     </table>
                 </div>
             </div>

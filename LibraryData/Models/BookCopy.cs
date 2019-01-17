@@ -8,7 +8,8 @@ namespace LibraryData.Models
     {
         public int ID { get; set; }
 
-        public Book Books { get; set; }
+        public Book Book { get; set; }
 
+        public bool Status { get; set; }
     }
 }

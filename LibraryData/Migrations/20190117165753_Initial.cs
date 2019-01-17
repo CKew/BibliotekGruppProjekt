@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LibraryData.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,7 +14,7 @@ namespace LibraryData.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: false)
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -28,7 +28,7 @@ namespace LibraryData.Migrations
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     PersonNr = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: false)
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -41,10 +41,10 @@ namespace LibraryData.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Title = table.Column<string>(nullable: true),
                     ISBN = table.Column<int>(nullable: false),
-                    AuthorID = table.Column<int>(nullable: false),
-                    Title = table.Column<string>(maxLength: 30, nullable: false),
-                    Description = table.Column<string>(nullable: true)
+                    Description = table.Column<string>(nullable: true),
+                    AuthorID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -54,7 +54,7 @@ namespace LibraryData.Migrations
                         column: x => x.AuthorID,
                         principalTable: "Authors",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -63,14 +63,15 @@ namespace LibraryData.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    BooksID = table.Column<int>(nullable: true)
+                    BookID = table.Column<int>(nullable: true),
+                    Status = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_BookCopies", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_BookCopies_Books_BooksID",
-                        column: x => x.BooksID,
+                        name: "FK_BookCopies_Books_BookID",
+                        column: x => x.BookID,
                         principalTable: "Books",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
@@ -83,42 +84,41 @@ namespace LibraryData.Migrations
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Checkout = table.Column<DateTime>(nullable: false),
-                    Returned = table.Column<DateTime>(nullable: false),
-                    BookID = table.Column<int>(nullable: false),
-                    MemberID = table.Column<int>(nullable: false)
+                    Returned = table.Column<DateTime>(nullable: true),
+                    BookCopyID = table.Column<int>(nullable: true),
+                    MemberID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Loans", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Loans_Books_BookID",
-                        column: x => x.BookID,
-                        principalTable: "Books",
+                        name: "FK_Loans_BookCopies_BookCopyID",
+                        column: x => x.BookCopyID,
+                        principalTable: "BookCopies",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Loans_Members_MemberID",
                         column: x => x.MemberID,
                         principalTable: "Members",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_BookCopies_BooksID",
+                name: "IX_BookCopies_BookID",
                 table: "BookCopies",
-                column: "BooksID");
+                column: "BookID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Books_AuthorID",
                 table: "Books",
-                column: "AuthorID",
-                unique: true);
+                column: "AuthorID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Loans_BookID",
+                name: "IX_Loans_BookCopyID",
                 table: "Loans",
-                column: "BookID");
+                column: "BookCopyID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Loans_MemberID",
@@ -129,16 +129,16 @@ namespace LibraryData.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "BookCopies");
-
-            migrationBuilder.DropTable(
                 name: "Loans");
 
             migrationBuilder.DropTable(
-                name: "Books");
+                name: "BookCopies");
 
             migrationBuilder.DropTable(
                 name: "Members");
+
+            migrationBuilder.DropTable(
+                name: "Books");
 
             migrationBuilder.DropTable(
                 name: "Authors");

@@ -22,8 +22,8 @@
             </a>
         </td>*@
                     <td><a asp-controller="Loan" asp-action="Detail" asp-route-id="@loan.ID">(Details)</a></td>
-                    <td class="">@loan.Member.Name</td>
-                    <td class="">@loan.Book.Title</td>
+                    <td class="">@loan.Member</td>
+                    <td class="">@loan.BookCopy</td>
                     <td class="">@loan.Checkout</td>
                     <td class="">@loan.Returned</td>
                 </tr>
