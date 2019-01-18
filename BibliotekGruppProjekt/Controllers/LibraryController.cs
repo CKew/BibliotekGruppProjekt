@@ -1,4 +1,5 @@
 ﻿using BibliotekGruppProjekt.Models.BookCatalog;
+using BibliotekGruppProjekt.Models.Library;
 using LibraryData;
 using LibraryData.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -14,54 +15,37 @@ namespace BibliotekGruppProjekt.Controllers
     {
         private readonly IBook _bookService;
         private readonly IAuthor _authorService;
-        private readonly IBookCopy _bookCopyService;
 
-        public LibraryController(IBook bookService, IAuthor authorService, IBookCopy bookCopyService)
+        public LibraryController(IBook bookService, IAuthor authorService)
         {
             _bookService = bookService;
             _authorService = authorService;
-            _bookCopyService = bookCopyService;
         }
 
- 
-        //// Gets all the books and returns it
-        //public IActionResult Index()
-        //{
-        //    var allBooks = _bookService.GetAll();
-        //    //var allAuthors = _authorService.GetSelectListItems();
+        public IActionResult Index()
+        {
+            var model = new LibraryIndexModel() { };
+            var allBooks = _bookService.GetAll();
+            var allAuthors = _authorService.GetSelectListItems();
 
-        //    var model = new BookIndexModel();
+            model.Books = allBooks;
+            model.Authors = allAuthors;
 
-        //    model.Books = allBooks;
-        //    //model.Authors = allAuthors;
 
-        //    return View(model);
-        //}
 
-        //// Retrieves specific book and returns the information regarding it
-        //public IActionResult Detail(int Id)
-        //{
-        //    var book = _bookService.GetBook(Id);
+            return View(model);
+        }
 
-        //    var model = new BookDetailModel();
+        public IActionResult Available()
+        {
+            var model = new LibraryIndexModel();
 
-        //    model.Title = book.Title;
-        //    model.Author = book.Author.Name;
-        //    model.Description = book.Description;
-        //    model.ISBN = book.ISBN;
-            
+            model.Books = _bookService.GetAvailable();
+            model.Authors = _authorService.GetSelectListItems();
 
-        //    return View(model);
-        //}
-
-        //public IActionResult Available()
-        //{
-        //    var model = new BookIndexModel();
-        //    model.Books = _bookService.GetAvailable();
-        //    model.Authors = _authorService.GetSelectListItems();
-        //    return View("Index", model);
-        //}
-
+            return View(model);
+        }
+        
         //[HttpPost]
         //[ValidateAntiForgeryToken]
         //public IActionResult Create(Book book)

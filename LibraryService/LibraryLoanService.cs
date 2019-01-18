@@ -20,7 +20,7 @@ namespace LibraryService
         // Adds a new loan with a member and bookCopy attatched to it to the Database. Also sets the bookCopy.Status == true.
         public void AddLoan(int memberId, int bookCopyId)
         {
-            var bookCopy = _context.BookCopies.FirstOrDefault(x => x.ID == bookCopyId);
+            var bookCopy = _context.BookCopies.FirstOrDefault(x => x.Id == bookCopyId);
             var member = _context.Members.FirstOrDefault(x => x.ID == memberId);
 
             var loan = new Loan() {
@@ -54,7 +54,7 @@ namespace LibraryService
         public void ReturnLoan(int memberId, int bookCopyId)
         {
             var member = _context.Members.FirstOrDefault(x => x.ID == memberId);
-            var bookCopy = _context.BookCopies.FirstOrDefault(x => x.ID == bookCopyId);
+            var bookCopy = _context.BookCopies.FirstOrDefault(x => x.Id == bookCopyId);
 
             var loan = _context.Loans.FirstOrDefault(x => x.BookCopy == bookCopy && x.Member == member);
 

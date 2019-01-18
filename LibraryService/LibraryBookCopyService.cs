@@ -19,7 +19,7 @@ namespace LibraryService
         // Adds a new copy of an existing book.
         public void AddBookCopy(int bookId)
         {
-            var book = _context.Books.FirstOrDefault(x => x.ID == bookId);
+            var book = _context.Books.FirstOrDefault(x => x.Id == bookId);
 
             var bookCopy = new BookCopy() { Book = book };
 
@@ -27,18 +27,10 @@ namespace LibraryService
             _context.SaveChanges();
         }
 
-        // Returns all the copies available for loan.
-        public IEnumerable<BookCopy> GetAvailable()
-        {
-            var availableBooks = _context.BookCopies.Where(x => x.Status == false);
-
-            return availableBooks;
-        }
-
         // Returns all the copies of a book.
         public IEnumerable<BookCopy> GetCopies(int bookId)
         {
-            var book = _context.Books.FirstOrDefault(x => x.ID == bookId);
+            var book = _context.Books.FirstOrDefault(x => x.Id == bookId);
 
             var bookCopies = _context.BookCopies.Where(x => x.Book == book);
 

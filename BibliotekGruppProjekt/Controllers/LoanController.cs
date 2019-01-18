@@ -21,7 +21,6 @@ namespace BibliotekGruppProjekt.Controllers
             _bookCopyService = bookCopyService;
             _memberService = memberService;
         }
-
         // Gets all the loans and returns it
         //public IActionResult Index()
         //{

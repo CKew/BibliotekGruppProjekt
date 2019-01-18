@@ -10,6 +10,8 @@ namespace LibraryData
     {
         IEnumerable<Book> GetAllBooksFromAuthor(int authorId);
 
+        IEnumerable<SelectListItem> GetSelectListItems();
+
         void AddAuthor(Author author);
     }
 }

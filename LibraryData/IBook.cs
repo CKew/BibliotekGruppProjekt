@@ -9,6 +9,7 @@ namespace LibraryData
     {
         IEnumerable<Book> GetAll();
         IEnumerable<Book> GetFromAuthor(int authorId);
+        IEnumerable<Book> GetAvailable();
 
         void AddBook(Book book);
     }

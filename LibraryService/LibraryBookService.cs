@@ -39,5 +39,19 @@ namespace LibraryService
 
             return authorBooks;
         }
+
+        public IEnumerable<Book> GetAvailable()
+        {
+            var availableBookCopies = _context.BookCopies.Where(x => x.Status == false);
+            var availablebooks = availableBookCopies.Select(x => x.Book);
+
+            return availablebooks;
+        }
+
+        //public bool IsAvailable(Book book)
+        //{
+        //    var availableBookCopies = _context.BookCopies.Where(x => x.Status == false);
+        //    var availableBooks = _context.Books.Where(x => x.BookCopies.)
+        //}
     }
 }

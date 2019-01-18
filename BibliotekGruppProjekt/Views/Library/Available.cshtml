@@ -2,14 +2,13 @@
 
 <div id="books">
     <h3></h3>
-    <a asp-action="Available" class="btn btn-primary">Tillgängliga</a>
+    <a asp-action="Index" class="btn btn-primary">Alla</a>
     <div id="booksTable">
         <table>
             <thead>
                 <tr>
                     <th>Title: </th>
                     <th>Author: </th>
-                    <th>Description: </th>
                 </tr>
             </thead>
             <tbody>
@@ -24,7 +23,7 @@
                         <td><a asp-controller="Book" asp-action="Detail" asp-route-id="@book.Id">(Details)</a></td>
                         <td class="">@book.Title</td>
                         <td class="">@book.Author.Name</td>
-                        <td class="">@book.Description</td>
+                        
                     </tr>
                 }
             </tbody>

@@ -1,6 +1,7 @@
 ﻿using LibraryData;
 using LibraryData.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,17 @@ namespace LibraryService
             var authorBooks = _context.Books.Where(x => x.Author == author);
 
             return authorBooks;
+        }
+
+        // Not quite sure what it does. But it makes the items available in the index model. Probably due to eager loading.
+        public IEnumerable<SelectListItem> GetSelectListItems()
+        {
+            return _context.Authors.ToList().OrderBy(x => x.ID).Select(x =>
+                   new SelectListItem
+                   {
+                       Text = $"{x.Name}",
+                       Value = x.ID.ToString()
+                   });
         }
     }
 }
