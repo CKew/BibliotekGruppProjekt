@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LibraryData.Models
 {
@@ -13,8 +14,12 @@ namespace LibraryData.Models
 
         public DateTime? Returned { get; set; }
 
-        public BookCopy BookCopy { get; set; }
+        [ForeignKey("BookCopy")]
+        public int BookCopyId { get; set; }
+        public virtual BookCopy BookCopy { get; set; }
 
-        public Member Member { get; set; }
+        [ForeignKey("Member")]
+        public int MemberId { get; set; }
+        public virtual Member Member { get; set; }
     }
 }

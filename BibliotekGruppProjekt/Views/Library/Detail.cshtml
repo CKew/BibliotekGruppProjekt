@@ -1,4 +1,4 @@
-﻿@model BibliotekGruppProjekt.Models.BookCatalog.BookDetailModel;
+﻿@model BibliotekGruppProjekt.Models.Library.BookDetailModel;
 
 <div class="container">
     <div class="header clearfix detailHeading">
@@ -12,7 +12,7 @@
                     <table>
                        <tr>
                            <td>Description: @Model.Description</td>
-                           <td>Author: @Model.Author</td>
+                           <td>Author: @Model.AuthorName</td>
                            <td>ISBN: @Model.ISBN</td>
                            <td>BookCopies: @Model.BookCopies</td>
                        </tr>

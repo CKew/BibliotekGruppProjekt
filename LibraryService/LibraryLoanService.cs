@@ -4,6 +4,7 @@ using LibraryData;
 using LibraryData.Models;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace LibraryService
 {
@@ -18,10 +19,8 @@ namespace LibraryService
         }
 
         // Adds a new loan with a member and bookCopy attatched to it to the Database. Also sets the bookCopy.Status == true.
-        public void AddLoan(int memberId, int bookCopyId)
+        public void AddLoan(Member member, BookCopy bookCopy)
         {
-            var bookCopy = _context.BookCopies.FirstOrDefault(x => x.Id == bookCopyId);
-            var member = _context.Members.FirstOrDefault(x => x.ID == memberId);
 
             var loan = new Loan() {
                 Member = member,
@@ -35,19 +34,22 @@ namespace LibraryService
         }
 
         // Returns all the loans.
-        public IEnumerable<Loan> GetAll()
+        public IQueryable<Loan> GetAll()
         {
-            return _context.Loans;
+            return _context.Loans
+                .Include(x => x.BookCopy.Book)
+                .Include(x => x.Member);
         }
 
+
+
         // Returns all the loans from a specified member.
-        public IEnumerable<Loan> GetFromMember(int memberId)
+        public Loan GetFromMemberId(int memberId)
         {
             var member = _context.Members.FirstOrDefault(x => x.ID == memberId);
 
-            var memberLoans = _context.Loans.Where(x => x.Member == member);
+            return _context.Loans.FirstOrDefault(x => x.Member == member);
 
-            return memberLoans;
         }
         
         // Returns a loan from a specified member and book and removes it from the database. sets the bookCopy.Status == false;
@@ -64,6 +66,15 @@ namespace LibraryService
             _context.SaveChanges();
         }
 
+        public string GetBookTitle(int Id)
+        {
+            return GetAll().FirstOrDefault(x => x.ID == Id).BookCopy.Book.Title;
+        }
+
+        public string GetMemberName(int Id)
+        {
+            return GetAll().FirstOrDefault(x => x.ID == Id).Member.Name;
+        }
 
 
         //// Checks how many days the book has been loaned and if the book has been delayed

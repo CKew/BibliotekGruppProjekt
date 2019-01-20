@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace LibraryService
 {
@@ -17,12 +18,24 @@ namespace LibraryService
             _context = context;
         }
 
-        // Returns all the loans of a specified member.
-        public IEnumerable<Loan> GetLoans(int memberId)
+        public IQueryable<Member> GetAll()
         {
-            var member = _context.Members.FirstOrDefault(x => x.ID == memberId);
+            return _context.Members
+                .Include(x => x.Loans);
+        }
 
-            var memberLoans = _context.Loans.Where(x => x.Member == member);
+        public Member GetFromId(int Id)
+        {
+            return GetAll().FirstOrDefault(x => x.ID == Id);
+        }
+
+        // Returns all the loans of a specified member.
+        public IQueryable<Loan> GetLoansFromId(int memberId)
+        {
+            var member = GetAll().FirstOrDefault(x => x.ID == memberId);
+
+            var memberLoans = _context.Loans.Where(x => x.Member == member)
+                .Include(x => x.BookCopy.Book);
 
             return memberLoans;
         }
@@ -34,5 +47,8 @@ namespace LibraryService
             _context.SaveChanges();
         }
 
+
+
+        
     }
 }

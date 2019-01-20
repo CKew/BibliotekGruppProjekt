@@ -27,9 +27,12 @@ namespace LibraryService
         // Returns all the unique books in the DB.
         public IEnumerable<Book> GetAll()
         {
-            return _context.Books;
+            return _context.Books
+                .Include(x => x.Author)
+                .Include(x => x.BookCopies);
         }
 
+        
         // Gets all the books from a specific author
         public IEnumerable<Book> GetFromAuthor(int authorId)
         {
@@ -43,9 +46,10 @@ namespace LibraryService
         public IEnumerable<Book> GetAvailable()
         {
             var availableBookCopies = _context.BookCopies.Where(x => x.Status == false);
-            var availablebooks = availableBookCopies.Select(x => x.Book);
 
-            return availablebooks;
+            return availableBookCopies.Select(x => x.Book)
+                .Include(x => x.Author);
+
         }
 
         //public bool IsAvailable(Book book)

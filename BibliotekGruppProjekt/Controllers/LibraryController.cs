@@ -1,5 +1,4 @@
-﻿using BibliotekGruppProjekt.Models.BookCatalog;
-using BibliotekGruppProjekt.Models.Library;
+﻿using BibliotekGruppProjekt.Models.Library;
 using LibraryData;
 using LibraryData.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -26,22 +25,20 @@ namespace BibliotekGruppProjekt.Controllers
         {
             var model = new LibraryIndexModel() { };
             var allBooks = _bookService.GetAll();
-            var allAuthors = _authorService.GetSelectListItems();
 
             model.Books = allBooks;
-            model.Authors = allAuthors;
 
 
 
             return View(model);
         }
 
+
         public IActionResult Available()
         {
             var model = new LibraryIndexModel();
 
             model.Books = _bookService.GetAvailable();
-            model.Authors = _authorService.GetSelectListItems();
 
             return View(model);
         }

@@ -13,7 +13,7 @@ namespace LibraryData.Models
 
         public string Name { get; set; }
 
-        public IEnumerable<Loan> Loans { get; set; }
+        public virtual ICollection<Loan> Loans { get; set; }
 
     }
 }

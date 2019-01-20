@@ -1,4 +1,4 @@
-﻿@model BibliotekGruppProjekt.Models.LoanCatalog.LoanDetailModel;
+﻿@model BibliotekGruppProjekt.Models.Loan.LoanDetailModel;
 
 <div class="container">
     <div class="header clearfix detailHeading">
@@ -8,10 +8,11 @@
         <div class="row">
             <div class="col-md-4">
                 <div>
-                    <h2>@Model.Member</h2>
+                    <h2>@Model.MemberName</h2>
+                    <p>Member ID = @Model.ID</p>
                     <table>
-                        <tr>Book on Loan: @Model.Book</tr>
-                        <tr>Loaned since: @Model.Checkout.ToString("MM/dd/yyyy")</tr>
+                        <tr>Book on Loan: @Model.BookTitle</tr>
+                        <tr>Loaned since: @Model.Checkout</tr>
                     </table>
                 </div>
             </div>

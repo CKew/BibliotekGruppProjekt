@@ -10,8 +10,6 @@ namespace BibliotekGruppProjekt.Models.Library
     public class LibraryIndexModel
     {
         public IEnumerable<Book> Books { get; set; }
-        public IEnumerable<SelectListItem> Authors { get; set; }
-        public IEnumerable<BookCopy> BookCopies { get; set; }
 
     }
 }

@@ -15,7 +15,7 @@ namespace BibliotekGruppProjekt.Models.Member
         public decimal OverdueFees { get; set; }
         /*public IEnumerable<Checkout> AssetsCheckedOut { get; set; }
         public IEnumerable<CheckoutHistory> CheckoutHistory { get; set; }*/
-        public IEnumerable<Loan> Loans { get; set; }
+        public IEnumerable<LibraryData.Models.Loan> Loans { get; set; }
 
     }
 }

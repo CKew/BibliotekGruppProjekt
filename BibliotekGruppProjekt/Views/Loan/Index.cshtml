@@ -1,4 +1,4 @@
-﻿@model BibliotekGruppProjekt.Models.LoanCatalog.LoanIndexModel
+﻿@model BibliotekGruppProjekt.Models.Loan.LoanIndexModel
 
 <div id="loans">
     <h3></h3>
@@ -22,10 +22,17 @@
             </a>
         </td>*@
                     <td><a asp-controller="Loan" asp-action="Detail" asp-route-id="@loan.ID">(Details)</a></td>
-                    <td class="">@loan.Member</td>
-                    <td class="">@loan.BookCopy</td>
+                    <td class="">@loan.Member.Name</td>
+                    <td class="">@loan.BookCopy.Book.Title</td>
                     <td class="">@loan.Checkout</td>
+                    @if (loan.Returned == null)
+                    {
+                        <td class="">Not Returned.</td>
+                    }
+                    else
+                    {
                     <td class="">@loan.Returned</td>
+                    }
                 </tr>
                 }
             </tbody>

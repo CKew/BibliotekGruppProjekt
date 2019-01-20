@@ -1,4 +1,5 @@
-﻿using BibliotekGruppProjekt.Models.Member;
+﻿using BibliotekGruppProjekt.Models.Loan;
+using BibliotekGruppProjekt.Models.Member;
 using LibraryData;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -19,39 +20,27 @@ namespace BibliotekGruppProjekt.Controllers
             _loanService = loanService;
         }
 
-        // Gets all the members created and returns it
-        //public IActionResult Index()
-        //{
-        //    var allMembers = _memberService.GetAll();
+        public IActionResult Index()
+        {
+            var model = new MemberIndexModel();
 
-        //    //var memberModels = allMembers.Select(m => new MemberDetailModel
-        //    //{
-        //    //    ID = m.ID,
-        //    //    Name = m.Name,
-        //    //    PersonNr = m.PersonNr
-        //    //    //Loans = m.Loans
-        //    //    /*OverdueFees = m.?.Fees*/
-        //    //}).ToList();
+            model.Members = _memberService.GetAll();
 
-        //    var model = new MemberIndexModel();
-        //    model.Members = allMembers;
-        //    return View(model);
+            return View(model);
+        }
 
-        //}
+        public IActionResult Detail(int Id)
+        {
+            var model = new MemberDetailModel();
+            var member = _memberService.GetFromId(Id);
+            model.ID = Id;
+            model.Loans = _memberService.GetLoansFromId(Id);
+            model.Name = member.Name;
+            model.PersonNr = member.PersonNr;
+            
+            //model.OverdueFees = member.OverdueFees;
 
-        //// Retrieves the specific member and returns information regarding that user
-        //public IActionResult Detail(int ID)
-        //{
-        //    var member = _memberService.GetMember(ID);
-
-        //    var model = new MemberDetailModel();
-
-        //    model.ID = member.ID;
-        //    model.Loans = member.Loans;
-        //    model.Name = member.Name;
-        //    model.PersonNr = member.PersonNr;
-
-        //    return View(model);
-        //}
+            return View(model);
+        }
     }
 }

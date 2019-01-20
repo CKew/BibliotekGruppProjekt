@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LibraryData.Models
 {
@@ -15,9 +16,11 @@ namespace LibraryData.Models
 
         public string Description { get; set; }
 
-        public IEnumerable<BookCopy> BookCopies { get; set; }
+        public virtual ICollection<BookCopy> BookCopies { get; set; }
 
-        public Author Author { get; set; }
+        [ForeignKey("Author")]
+        public int AuthorId { get; set; }
+        public virtual Author Author { get; set; }
 
     }
 }

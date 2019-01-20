@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace LibraryData.Models
@@ -8,7 +9,9 @@ namespace LibraryData.Models
     {
         public int Id { get; set; }
 
-        public Book Book { get; set; }
+        [ForeignKey("Book")]
+        public int BookId { get; set; }
+        public virtual Book Book { get; set; }
 
         public bool Status { get; set; }
     }

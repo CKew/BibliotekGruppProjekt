@@ -1,4 +1,4 @@
-﻿using BibliotekGruppProjekt.Models.LoanCatalog;
+﻿using BibliotekGruppProjekt.Models.Loan;
 using LibraryData;
 using LibraryService;
 using Microsoft.AspNetCore.Mvc;
@@ -21,16 +21,32 @@ namespace BibliotekGruppProjekt.Controllers
             _bookCopyService = bookCopyService;
             _memberService = memberService;
         }
+
         // Gets all the loans and returns it
-        //public IActionResult Index()
-        //{
-        //    var allLoans = _loanService.GetAll();
+        public IActionResult Index()
+        {
+            var allLoans = _loanService.GetAll();
 
-        //    var model = new LoanIndexModel();
-        //    model.Loans = allLoans;
+            var model = new LoanIndexModel();
+            model.Loans = allLoans;
 
-        //    return View(model);
-        //}
+            return View(model);
+        }
+
+        public IActionResult Detail(int Id)
+        {
+            var loan = _loanService.GetFromMemberId(Id);
+
+            var model = new LoanDetailModel();
+            model.ID = Id;
+            model.BookTitle = _loanService.GetBookTitle(Id);
+            model.MemberName = _loanService.GetMemberName(Id);
+            model.Checkout = loan.Checkout;
+            
+
+            return View(model);
+
+        }
 
         //// Retrieves a loan of a specific member and returns it
         //public IActionResult Detail(int ID)
@@ -41,7 +57,7 @@ namespace BibliotekGruppProjekt.Controllers
 
         //    model.ID = member.ID;
         //    model.Member = member;
-            
+
 
         //    return View(model);
         //}

@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BibliotekGruppProjekt.Models.LoanCatalog
+namespace BibliotekGruppProjekt.Models.Loan
 {
     public class LoanDetailModel
     {
         public int ID { get; set; }
-        public Book Book { get; set; }
-        public LibraryData.Models.Member Member { get; set; }
+        public string BookTitle { get; set; }
+        public string MemberName { get; set; }
         public DateTime Checkout { get; set; }
+        
     }
 }
