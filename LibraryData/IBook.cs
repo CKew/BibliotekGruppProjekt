@@ -10,7 +10,9 @@ namespace LibraryData
         IEnumerable<Book> GetAll();
         IEnumerable<Book> GetFromAuthor(int authorId);
         IEnumerable<Book> GetAvailable();
+        ICollection<BookCopy> GetAllBookCopies(int Id);
 
+        Book GetFromId(int Id);
         void AddBook(Book book);
     }
 }

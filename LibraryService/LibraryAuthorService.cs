@@ -18,6 +18,17 @@ namespace LibraryService
             _context = context;
         }
 
+        public Author GetFromId(int Id)
+        {
+            return GetAll().FirstOrDefault(x => x.ID == Id);
+        }
+
+        public IQueryable<Author> GetAll()
+        {
+            return _context.Authors
+                .Include(x => x.Books);
+        }
+
         // Adds a new author to the database.
         public void AddAuthor(Author author)
         {
@@ -26,15 +37,14 @@ namespace LibraryService
         }
 
         // Returns all the books by a specified author.
-        public IEnumerable<Book> GetAllBooksFromAuthor(int authorId)
+        public IQueryable<Book> GetAllBooksFromAuthor(int authorId)
         {
-            var author = _context.Authors.FirstOrDefault(x => x.ID == authorId);
+            var author = GetFromId(authorId);
 
-            var authorBooks = _context.Books.Where(x => x.Author == author);
+            return _context.Books.Where(x => x.Author == author);
 
-            return authorBooks;
         }
-
+        
         // Not quite sure what it does. But it makes the items available in the index model. Probably due to eager loading.
         public IEnumerable<SelectListItem> GetSelectListItems()
         {

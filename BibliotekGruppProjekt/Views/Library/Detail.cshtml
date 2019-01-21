@@ -11,10 +11,11 @@
                     <h2>@Model.Title</h2>
                     <table>
                        <tr>
-                           <td>Description: @Model.Description</td>
                            <td>Author: @Model.AuthorName</td>
+                           <td>Description: @Model.Description</td>
                            <td>ISBN: @Model.ISBN</td>
-                           <td>BookCopies: @Model.BookCopies</td>
+                           <td>BookCopies: @Model.BookCopies.Count()</td>
+                           <td>Book ID: @Model.ID</td>
                        </tr>
                     </table>
                 </div>

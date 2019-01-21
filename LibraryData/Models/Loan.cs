@@ -13,6 +13,8 @@ namespace LibraryData.Models
         public DateTime Checkout { get; set; }
 
         public DateTime? Returned { get; set; }
+        
+        public int Fees { get; set; }
 
         [ForeignKey("BookCopy")]
         public int BookCopyId { get; set; }

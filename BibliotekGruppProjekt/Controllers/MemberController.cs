@@ -1,6 +1,7 @@
 ﻿using BibliotekGruppProjekt.Models.Loan;
 using BibliotekGruppProjekt.Models.Member;
 using LibraryData;
+using LibraryData.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -42,5 +43,7 @@ namespace BibliotekGruppProjekt.Controllers
 
             return View(model);
         }
+
+
     }
 }

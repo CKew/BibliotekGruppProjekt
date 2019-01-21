@@ -2,7 +2,11 @@
 
 <div id="books">
     <h3>All Books:</h3>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
     <a asp-action="Available" class="btn btn-primary">Tillgängliga</a>
+
     <div id="booksTable">
         <table>
             <thead>
@@ -10,22 +14,24 @@
                     <th>Title: </th>
                     <th>Author: </th>
                     <th>Description: </th>
+                    <th>Copies: </th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var book in Model.Books)
                 {
-                    <tr class="bookrow">
-                        @*<td class="loanrow">
-                                <a asp-controller="Loan" asp-action=">Index" asp-route-id="@loan.ID">
+                <tr class="bookrow">
+                    @*<td class="loanrow">
+                            <a asp-controller="Loan" asp-action=">Index" asp-route-id="@loan.ID">
 
-                                </a>
-                            </td>*@
-                        <td><a asp-controller="Book" asp-action="Detail" asp-route-id="@book.Id">(Details)</a></td>
-                        <td class="">@book.Title</td>
-                        <td class="">@book.Author.Name</td>
-                        <td class="">@book.Description</td>
-                    </tr>
+                            </a>
+                        </td>*@
+                    <td><a asp-controller="Library" asp-action="Detail" asp-route-id="@book.Id">(Details)</a></td>
+                    <td class="">@book.Title</td>
+                    <td class="">@book.Author.Name</td>
+                    <td class="">@book.Description</td>
+                    <td class="">@book.BookCopies.Count()</td>
+                </tr>
                 }
             </tbody>
         </table>

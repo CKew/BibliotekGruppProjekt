@@ -2,6 +2,7 @@
 using LibraryData;
 using LibraryData.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -43,17 +44,21 @@ namespace BibliotekGruppProjekt.Controllers
             return View(model);
         }
         
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Create(Book book)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _bookService.AddBook(book);
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(book);
-        //}
+        public IActionResult Detail(int Id)
+        {
+            var model = new BookDetailModel();
+
+            var book = _bookService.GetFromId(Id);
+            model.ID = Id;
+            model.Title = book.Title;
+            model.ISBN = book.ISBN;
+            model.Description = book.Description;
+            model.AuthorName = book.Author.Name;
+            model.BookCopies = _bookService.GetAllBookCopies(Id);
+
+            return View(model);
+        }
+
 
         //public IActionResult Edit(int id)
         //{
@@ -116,13 +121,15 @@ namespace BibliotekGruppProjekt.Controllers
 
         //// Author
 
-        //public IActionResult FilterOnAuthor(BookIndexModel model)
-        //{
-        //    model.Authors = _authorService.GetSelectListItems();    
+        /*public IActionResult FilterOnAuthor(int authorId)
+        {
+            var model = new LibraryIndexModel();
+            model.Books = _bookService.GetFromAuthor(authorId);
+            model.Authors = _authorService.GetSelectListItems();
+            
+            return View("Index", model);
 
-        //    return View("index", model);
-
-        //}
+        }*/
 
         //public IActionResult Create()
         //{

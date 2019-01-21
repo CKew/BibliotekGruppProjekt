@@ -2,6 +2,9 @@
 
 <div id="loans">
     <h3></h3>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
     <div id="loansTable">
         <table>
             <thead>
@@ -17,17 +20,17 @@
                 {
                 <tr class="loanrow">
                     @*<td class="loanrow">
-            <a asp-controller="Loan" asp-action=">Index" asp-route-id="@loan.ID">
+                            <a asp-controller="Loan" asp-action=">Index" asp-route-id="@loan.ID">
 
-            </a>
-        </td>*@
+                            </a>
+                        </td>*@
                     <td><a asp-controller="Loan" asp-action="Detail" asp-route-id="@loan.ID">(Details)</a></td>
                     <td class="">@loan.Member.Name</td>
                     <td class="">@loan.BookCopy.Book.Title</td>
                     <td class="">@loan.Checkout</td>
                     @if (loan.Returned == null)
                     {
-                        <td class="">Not Returned.</td>
+                    <td class="">Not Returned.</td>
                     }
                     else
                     {

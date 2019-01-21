@@ -1,5 +1,6 @@
 ﻿using BibliotekGruppProjekt.Models.Loan;
 using LibraryData;
+using LibraryData.Models;
 using LibraryService;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,14 +13,12 @@ namespace BibliotekGruppProjekt.Controllers
     public class LoanController : Controller
     {
         private readonly ILoan _loanService;
-        private readonly IBookCopy _bookCopyService;
-        private readonly IMember _memberService;
+        private readonly ICheckout _checkoutService;
 
-        public LoanController(ILoan loans, IBookCopy bookCopyService, IMember memberService)
+        public LoanController(ILoan loans, ICheckout checkoutService)
         {
             _loanService = loans;
-            _bookCopyService = bookCopyService;
-            _memberService = memberService;
+            _checkoutService = checkoutService;
         }
 
         // Gets all the loans and returns it
@@ -46,6 +45,11 @@ namespace BibliotekGruppProjekt.Controllers
 
             return View(model);
 
+        }
+
+        public IActionResult Remove(Loan loan)
+        {
+            return View();
         }
 
         //// Retrieves a loan of a specific member and returns it

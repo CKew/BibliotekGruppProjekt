@@ -10,6 +10,7 @@ namespace LibraryData.Models
     {
         public int Id { get; set; }
 
+        [Required]
         public string Title { get; set; }
 
         public string ISBN { get; set; }
@@ -18,6 +19,7 @@ namespace LibraryData.Models
 
         public virtual ICollection<BookCopy> BookCopies { get; set; }
 
+        [Required]
         [ForeignKey("Author")]
         public int AuthorId { get; set; }
         public virtual Author Author { get; set; }

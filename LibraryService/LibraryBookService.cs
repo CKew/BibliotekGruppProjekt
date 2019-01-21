@@ -17,6 +17,16 @@ namespace LibraryService
             _context = context;
         }
 
+        public ICollection<BookCopy> GetAllBookCopies(int Id)
+        {
+            return GetFromId(Id).BookCopies;
+        }
+
+        public Book GetFromId(int Id)
+        {
+            return GetAll().FirstOrDefault(x => x.Id == Id);
+        }
+
         // Adds a new unique book.
         public void AddBook(Book book)
         {
@@ -38,9 +48,8 @@ namespace LibraryService
         {
             var author = _context.Authors.FirstOrDefault(x => x.ID == authorId);
 
-            var authorBooks = _context.Books.Where(x => x.Author == author);
+            return _context.Books.Where(x => x.Author == author);
 
-            return authorBooks;
         }
 
         public IEnumerable<Book> GetAvailable()

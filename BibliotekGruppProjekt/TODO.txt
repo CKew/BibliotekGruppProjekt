@@ -34,3 +34,12 @@ INSERT INTO Loans VALUES
 ('01/11/2019 16:53', null, 2, 1),
 ('01/15/2019 13:43', null, 4, 2),
 ('01/09/2019 15:33', null, 6, 3); 
+
+
+
+
+Lägga till nya bookcopies
+Tydligt se lån är försenat
+Tydligt se lån är avslutat
+Lämna tillbaka en bok
+Låna bok max 14 dagar (12kr/dag avgift utöver)

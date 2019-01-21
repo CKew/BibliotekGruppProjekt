@@ -12,8 +12,8 @@ namespace LibraryData
         IQueryable<Loan> GetAll();
         Loan GetFromMemberId(int memberId);
 
-        void AddLoan(Member memberId, BookCopy bookCopyId);
-        void ReturnLoan(int memberID , int bookCopyId);
+        void AddLoan(Loan loan);
+        void ReturnLoan(Loan loan);
 
         string GetMemberName(int Id);
         string GetBookTitle(int Id);

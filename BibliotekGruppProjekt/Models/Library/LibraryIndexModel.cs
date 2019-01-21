@@ -10,6 +10,5 @@ namespace BibliotekGruppProjekt.Models.Library
     public class LibraryIndexModel
     {
         public IEnumerable<Book> Books { get; set; }
-
     }
 }

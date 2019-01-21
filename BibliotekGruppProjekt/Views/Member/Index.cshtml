@@ -4,6 +4,9 @@
 }
 
 <h3>@ViewBag.Title</h3>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
 <div id="memberIndex">
     <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp customTable" id="patronIndexTable">
         <thead>
@@ -17,12 +20,12 @@
         <tbody>
             @foreach(var member in Model.Members)
             {
-                <tr>
-                    <td><a asp-controller="Member" asp-action="Detail" asp-route-id="@member.ID">(Profile)</a></td>
-                    <td>@member.Name</td>
-                    <td>@member.PersonNr</td>
-                    @*<td>@member.OverdueFees</td>*@
-                </tr>
+            <tr>
+                <td><a asp-controller="Member" asp-action="Detail" asp-route-id="@member.ID">(Profile)</a></td>
+                <td>@member.Name</td>
+                <td>@member.PersonNr</td>
+                @*<td>@member.OverdueFees</td>*@
+            </tr>
             }
         </tbody>
     </table>
