@@ -39,5 +39,24 @@ namespace BibliotekGruppProjekt.Controllers
             return View(model);
         }
 
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Author author)
+        {
+            if (ModelState.IsValid)
+            {
+                _authorService.AddAuthor(author);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(author);
+            }
+        }
+
     }
 }

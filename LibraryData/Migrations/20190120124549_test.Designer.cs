@@ -4,14 +4,16 @@ using LibraryData;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LibraryData.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    partial class LibraryContextModelSnapshot : ModelSnapshot
+    [Migration("20190120124549_test")]
+    partial class test
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,8 +46,7 @@ namespace LibraryData.Migrations
 
                     b.Property<string>("ISBN");
 
-                    b.Property<string>("Title")
-                        .IsRequired();
+                    b.Property<string>("Title");
 
                     b.HasKey("Id");
 
@@ -81,8 +82,6 @@ namespace LibraryData.Migrations
 
                     b.Property<DateTime>("Checkout");
 
-                    b.Property<int>("Fees");
-
                     b.Property<int>("MemberId");
 
                     b.Property<DateTime?>("Returned");
@@ -102,10 +101,7 @@ namespace LibraryData.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Fees");
-
-                    b.Property<string>("Name")
-                        .IsRequired();
+                    b.Property<string>("Name");
 
                     b.Property<int>("PersonNr");
 
