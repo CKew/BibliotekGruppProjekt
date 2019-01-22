@@ -14,6 +14,7 @@ namespace BibliotekGruppProjekt.Models.Loan
         public string MemberName { get; set; }
         public DateTime Checkout { get; set; }
         public DateTime? Returned { get; set; }
+        public string TimeSpan { get; set; }
         
     }
 }

@@ -14,6 +14,8 @@
                         <tr>Book on Loan: @Model.BookTitle</tr>
                         <br />
                         <tr>Loaned since: @Model.Checkout</tr>
+                        <br />
+                        <tr>Days Loaned: @Model.TimeSpan</tr>
                     </table>
                     @if (Model.Returned == null)
                     {

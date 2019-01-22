@@ -7,17 +7,15 @@ using System.Text;
 
 namespace LibraryData
 {
-    public interface IAuthor
+    public interface IMemberService
     {
-        IQueryable<Author> GetAll();
-        
-        IQueryable<Book> GetAllBooksFromAuthor(int authorId);
 
+        IQueryable<Member> GetAll();
+        IQueryable<Loan> GetLoansFromId(int memberId);
         IEnumerable<SelectListItem> GetSelectListItems();
+        Member GetFromId(int? Id);
+        int GetIdFromLoan(Loan loan);
 
-        Author GetFromId(int? Id);
-
-        void AddAuthor(Author author);
-        void Delete(int id);
+        void AddMember(Member member);
     }
 }

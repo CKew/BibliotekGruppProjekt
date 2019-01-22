@@ -9,11 +9,11 @@ using System.Text;
 
 namespace LibraryService
 {
-    public class LibraryAuthorService : IAuthor
+    public class AuthorService : IAuthorService
     {
         private LibraryContext _context;
 
-        public LibraryAuthorService(LibraryContext context)
+        public AuthorService(LibraryContext context)
         {
             _context = context;
         }

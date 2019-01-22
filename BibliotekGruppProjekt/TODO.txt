@@ -1,11 +1,4 @@
-﻿ - FIXED so u can se available books! When status = false the book is available.
-
- - Fix the Fees and logic connecting all the data.
-
-
-
-
- SQL CODE:
+﻿ SQL CODE:
 
 INSERT INTO Authors VALUES 
 ('Mary Shelley'),
@@ -13,9 +6,9 @@ INSERT INTO Authors VALUES
 ('Charles Dickens');
 
 INSERT INTO Books VALUES 
-('845238391-1', 'Moby Dick', 'Handlar om en stor Val och en beslutsam sjömann', 1),
-('845238391-2', 'Divkovic Självbiografi', 'Om en beslutsam man på ett uppdrag att lära sig datorernas inre', 2),
-('845238391-3', 'David Copperfield', 'The adventures of a young and adventurous man', 3);
+('Moby Dick','845238391-1', 'Handlar om en stor Val och en beslutsam sjömann', 1),
+('Divkovic Självbiografi','845238391-2', 'Om en beslutsam man på ett uppdrag att lära sig datorernas inre', 2),
+('David Copperfield', '845238391-3', 'The adventures of a young and adventurous man', 3);
 
 INSERT INTO BookCopies VALUES 
 (1, 0),
@@ -26,20 +19,28 @@ INSERT INTO BookCopies VALUES
 (3, 1);
 
 INSERT INTO Members VALUES 
-(990729, 'Carl'),
-(970821, 'Leo'),
-(970615, 'Jakob');
+(990729, 'Carl', null),
+(970821, 'Leo', null),
+(970615, 'Jakob', null);
 
 INSERT INTO Loans VALUES 
-('01/11/2019 16:53', null, 2, 1),
-('01/15/2019 13:43', null, 4, 2),
-('01/09/2019 15:33', null, 6, 3); 
+('01/11/2019 16:53', null, null, 2, 1),
+('01/15/2019 13:43', null, null, 4, 2),
+('01/09/2019 15:33', null, null, 6, 3); 
+
+SELECT * FROM Authors
+SELECT* FROM BookCopies
+SELECT * FROM Books
+SELECT * FROM Loans
+SELECT * FROM Members
 
 
 
 Kommentera och Finslipa all kod.
-Tydligt se lån är försenat - Checkout
-Tydligt se lån är avslutat - Checkout
-Låna bok max 14 dagar (12kr/dag avgift utöver) - OverdueFees
 
-Loans (Avslutad/ Utlånad/ Försenad)
+Converta int till string i vissa entities
+Ändra Library Till book
+
+Gå igenom powerpoint och kolla Best Practices
+
+Flytta runt i Service så att Independency injections följs

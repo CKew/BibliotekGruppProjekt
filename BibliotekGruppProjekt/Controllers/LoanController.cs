@@ -13,23 +13,25 @@ namespace BibliotekGruppProjekt.Controllers
 {
     public class LoanController : Controller
     {
-        private readonly ILoan _loanService;
-        private readonly ICheckout _checkoutService;
-        private readonly IMember _memberService;
-        private readonly IBook _bookService;
+        private readonly ILoanService _loanService;
+        private readonly IFeeService _feeService;
+        private readonly IMemberService _memberService;
+        private readonly IBookService _bookService;
 
-        public LoanController(ILoan loans, ICheckout checkoutService, IMember memberService, IBook bookService)
+        public LoanController(ILoanService loans, IFeeService feeService, IMemberService memberService, IBookService bookService)
         {
             _bookService = bookService;
             _memberService = memberService;
             _loanService = loans;
-            _checkoutService = checkoutService;
+            _feeService = feeService;
         }
 
         // Gets all the loans and returns it
         public IActionResult Index()
         {
             var allLoans = _loanService.GetAll();
+
+            
 
             var model = new LoanIndexModel();
             model.Loans = allLoans;
@@ -42,6 +44,8 @@ namespace BibliotekGruppProjekt.Controllers
         {
             var loan = _loanService.GetFromId(Id);
 
+            var timeSinceLoaned = _feeService.DaysLoaned(Id);
+
             var model = new LoanDetailModel();
             model.ID = Id;
             model.BookTitle = _loanService.GetBookTitle(Id);
@@ -49,6 +53,7 @@ namespace BibliotekGruppProjekt.Controllers
             model.Checkout = loan.Checkout;
             model.Returned = loan.Returned;
             model.MemberId = _memberService.GetIdFromLoan(loan);
+            model.TimeSpan = timeSinceLoaned.ToString("%d");
             
 
             return View(model);

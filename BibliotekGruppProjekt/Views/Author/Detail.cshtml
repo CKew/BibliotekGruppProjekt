@@ -12,11 +12,15 @@
         <tbody>
 
             <tr>
+                
                 @foreach (var book in Model.Books)
                 {
-                    <td>@book.Title</td>
+                    <th>@book.Title</th>
+                    
                 }
+                
             </tr>
+            
         </tbody>
     </table>
     </div>

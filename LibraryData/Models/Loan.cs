@@ -16,6 +16,8 @@ namespace LibraryData.Models
         
         public int? Fees { get; set; }
 
+        public bool Delayed { get; set; }
+
         [ForeignKey("BookCopy")]
         public int BookCopyId { get; set; }
         public virtual BookCopy BookCopy { get; set; }

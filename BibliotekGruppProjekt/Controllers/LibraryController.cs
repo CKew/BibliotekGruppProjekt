@@ -13,11 +13,11 @@ namespace BibliotekGruppProjekt.Controllers
 {
     public class LibraryController : Controller
     {
-        private readonly IBook _bookService;
-        private readonly IAuthor _authorService;
+        private readonly IBookService _bookService;
+        private readonly IAuthorService _authorService;
         private readonly IBookCopy _bookCopyService;
 
-        public LibraryController(IBook bookService, IAuthor authorService, IBookCopy bookCopyService)
+        public LibraryController(IBookService bookService, IAuthorService authorService, IBookCopy bookCopyService)
         {
             _bookService = bookService;
             _authorService = authorService;

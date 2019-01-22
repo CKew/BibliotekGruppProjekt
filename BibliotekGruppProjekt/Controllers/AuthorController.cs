@@ -12,9 +12,9 @@ namespace BibliotekGruppProjekt.Controllers
 {
     public class AuthorController : Controller
     {
-        private readonly IAuthor _authorService;
+        private readonly IAuthorService _authorService;
 
-        public AuthorController(IAuthor author)
+        public AuthorController(IAuthorService author)
         {
             _authorService = author;
         }

@@ -17,7 +17,7 @@ namespace LibraryData.Models
 
         public string Description { get; set; }
 
-        public virtual ICollection<BookCopy> AvailableBookCopies { get; set; }
+        public virtual ICollection<BookCopy> BookCopies { get; set; }
 
         [Required]
         [ForeignKey("Author")]

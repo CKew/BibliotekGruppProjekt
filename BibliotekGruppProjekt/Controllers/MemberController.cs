@@ -12,10 +12,10 @@ namespace BibliotekGruppProjekt.Controllers
 {
     public class MemberController : Controller
     {
-        private readonly IMember _memberService;
-        private readonly ILoan _loanService;
+        private readonly IMemberService _memberService;
+        private readonly ILoanService _loanService;
 
-        public MemberController(IMember member, ILoan loanService)
+        public MemberController(IMemberService member, ILoanService loanService)
         {
             _memberService = member;
             _loanService = loanService;

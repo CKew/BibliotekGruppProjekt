@@ -7,7 +7,7 @@ using System.Text;
 
 namespace LibraryData
 {
-    public interface IBook
+    public interface IBookService
     {
         IEnumerable<Book> GetAll();
         IEnumerable<Book> GetFromAuthor(int authorId);

@@ -29,7 +29,11 @@
                     <td class="">@loan.Member.Name</td>
                     <td class="">@loan.BookCopy.Book.Title</td>
                     <td class="">@loan.Checkout</td>
-                    @if (loan.Returned == null)
+                    @if(loan.Returned == null && loan.Delayed == true)
+                    {
+                    <td class="danger">Delayed. Fees Due: @loan.Fees kr</td>
+                    }
+                    else if (loan.Returned == null)
                     {
                     <td class="danger">Not Returned.</td>
                     }
@@ -37,6 +41,7 @@
                     {
                     <td class="success">Returned: @loan.Returned</td>
                     }
+                    
                 </tr>
                 }
             </tbody>

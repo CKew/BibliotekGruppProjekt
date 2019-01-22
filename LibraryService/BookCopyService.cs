@@ -7,11 +7,11 @@ using LibraryData.Models;
 
 namespace LibraryService
 {
-    public class LibraryBookCopyService : IBookCopy
+    public class BookCopyService : IBookCopy
     {
         private LibraryContext _context;
 
-        public LibraryBookCopyService(LibraryContext context)
+        public BookCopyService(LibraryContext context)
         {
             _context = context;
         }

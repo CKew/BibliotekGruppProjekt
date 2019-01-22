@@ -39,17 +39,17 @@ namespace BibliotekGruppProjekt
             services.AddSingleton(Configuration);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddScoped<IMember, LibraryMemberService>();
+            services.AddScoped<IMemberService, MemberService>();
 
-            services.AddScoped<ILoan, LibraryLoanService>();
+            services.AddScoped<ILoanService, LoanService>();
 
-            services.AddScoped<IBook, LibraryBookService>();
+            services.AddScoped<IBookService, BookService>();
 
-            services.AddScoped<IAuthor, LibraryAuthorService>();
+            services.AddScoped<IAuthorService, AuthorService>();
 
-            services.AddScoped<IBookCopy, LibraryBookCopyService>();
+            services.AddScoped<IBookCopy, BookCopyService>();
 
-            services.AddScoped<ICheckout, LibraryCheckoutService>();
+            services.AddScoped<IFeeService, FeeService>();
     
             services.AddDbContext<LibraryContext>(options
                 => options.UseSqlServer(Configuration.GetConnectionString("LibraryConnection")));
