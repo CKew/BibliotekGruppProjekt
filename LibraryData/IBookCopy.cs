@@ -8,7 +8,7 @@ namespace LibraryData
     public interface IBookCopy
     {
         IEnumerable<BookCopy> GetCopies(int bookId);
-
-        void AddBookCopy(int bookId);
+        
+        void AddBookCopy(int Id);
     }
 }

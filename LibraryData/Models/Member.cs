@@ -14,7 +14,7 @@ namespace LibraryData.Models
         [Required]
         public string Name { get; set; }
 
-        public int Fees { get; set; }
+        public int? Fees { get; set; }
 
         public virtual ICollection<Loan> Loans { get; set; }
 

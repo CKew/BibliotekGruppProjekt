@@ -37,9 +37,9 @@ INSERT INTO Loans VALUES
 
 
 
+Kommentera och Finslipa all kod.
+Tydligt se lån är försenat - Checkout
+Tydligt se lån är avslutat - Checkout
+Låna bok max 14 dagar (12kr/dag avgift utöver) - OverdueFees
 
-Lägga till nya bookcopies
-Tydligt se lån är försenat
-Tydligt se lån är avslutat
-Lämna tillbaka en bok
-Låna bok max 14 dagar (12kr/dag avgift utöver)
+Loans (Avslutad/ Utlånad/ Försenad)

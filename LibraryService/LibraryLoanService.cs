@@ -21,8 +21,19 @@ namespace LibraryService
         // Adds a new loan with a member and bookCopy attatched to it to the Database. Also sets the bookCopy.Status == true.
         public void AddLoan(Loan loan)
         {
+            var _bookCopyService = new LibraryBookCopyService(_context);
+
+            loan.Checkout = DateTime.Now;
             _context.Add(loan);
+            _bookCopyService.SetStatusToTrue(loan);
             _context.SaveChanges();
+
+            
+        }
+
+        public Loan GetFromId(int Id)
+        {
+            return GetAll().FirstOrDefault(x => x.ID == Id);
         }
 
         // Returns all the loans.
@@ -33,10 +44,8 @@ namespace LibraryService
                 .Include(x => x.Member);
         }
 
-
-
         // Returns all the loans from a specified member.
-        public Loan GetFromMemberId(int memberId)
+        public Loan GetFromMemberId(int? memberId)
         {
             var member = _context.Members.FirstOrDefault(x => x.ID == memberId);
 
@@ -45,10 +54,13 @@ namespace LibraryService
         }
         
         // Returns a loan from a specified member and book and removes it from the database. sets the bookCopy.Status == false;
-        public void ReturnLoan(Loan loan)
+        public void ReturnLoan(int Id)
         {
-            loan.BookCopy.Status = false;
+            var loan = _context.Loans.FirstOrDefault(x => x.ID == Id);
+            loan.Returned = DateTime.Now;
+            var _bookCopyService = new LibraryBookCopyService(_context);
 
+            _bookCopyService.SetStatusToFalse(loan);
             _context.SaveChanges();
         }
 

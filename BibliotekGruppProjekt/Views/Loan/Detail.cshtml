@@ -9,16 +9,18 @@
             <div class="col-md-4">
                 <div>
                     <h2>@Model.MemberName</h2>
-                    <p>Member ID = @Model.ID</p>
+                    <p>Member ID = @Model.MemberId</p>
                     <table>
                         <tr>Book on Loan: @Model.BookTitle</tr>
+                        <br />
                         <tr>Loaned since: @Model.Checkout</tr>
                     </table>
+                    @if (Model.Returned == null)
+                    {
+                        <a class="btn btn-danger" asp-controller="Loan" asp-action="Return" asp-route-id="@Model.ID">Return Loan</a>
+                    }
                 </div>
             </div>
-            <!--<div class="col-md-4">
-                <h4>Assets currently on loan</h4>
-            </div>-->
         </div>
     </div>
 </div>

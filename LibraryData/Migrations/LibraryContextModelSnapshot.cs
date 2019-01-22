@@ -81,7 +81,7 @@ namespace LibraryData.Migrations
 
                     b.Property<DateTime>("Checkout");
 
-                    b.Property<int>("Fees");
+                    b.Property<int?>("Fees");
 
                     b.Property<int>("MemberId");
 
@@ -102,7 +102,7 @@ namespace LibraryData.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Fees");
+                    b.Property<int?>("Fees");
 
                     b.Property<string>("Name")
                         .IsRequired();
@@ -125,7 +125,7 @@ namespace LibraryData.Migrations
             modelBuilder.Entity("LibraryData.Models.BookCopy", b =>
                 {
                     b.HasOne("LibraryData.Models.Book", "Book")
-                        .WithMany("BookCopies")
+                        .WithMany("AvailableBookCopies")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

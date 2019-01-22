@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace BibliotekGruppProjekt.Controllers
@@ -18,6 +19,7 @@ namespace BibliotekGruppProjekt.Controllers
             _authorService = author;
         }
 
+        // Retrieves all the authors and returns them to the view
         public IActionResult Index()
         {
             var model = new AuthorIndexModel();
@@ -26,6 +28,7 @@ namespace BibliotekGruppProjekt.Controllers
             return View(model);
         }
 
+        // Gets information from specific author and returns it to the view
         public IActionResult Detail(int Id)
         {
             var model = new AuthorDetailModel();
@@ -39,6 +42,7 @@ namespace BibliotekGruppProjekt.Controllers
             return View(model);
         }
 
+        
         public IActionResult Create()
         {
             return View();
@@ -50,12 +54,35 @@ namespace BibliotekGruppProjekt.Controllers
             if (ModelState.IsValid)
             {
                 _authorService.AddAuthor(author);
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
             else
             {
-                return View(author);
+                return View();
             }
+        }
+
+        // Gets the specific author to delete and returns seperate view
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var author = _authorService.GetFromId(id);
+            if (author == null)
+            {
+                return NotFound();
+            }
+            return View(author);
+        }
+
+        // Confirmation to delete the specific author
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            _authorService.Delete(id);
+            return RedirectToAction(nameof(Index));
         }
 
     }

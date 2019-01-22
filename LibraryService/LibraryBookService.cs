@@ -1,5 +1,6 @@
 ﻿using LibraryData;
 using LibraryData.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,12 +18,19 @@ namespace LibraryService
             _context = context;
         }
 
-        public ICollection<BookCopy> GetAllBookCopies(int Id)
+        // Gets all the available bookcopies from a book
+        public IQueryable<BookCopy> GetAllAvailableBookCopiesFromId(int Id)
         {
-            return GetFromId(Id).BookCopies;
+            return GetAllBookCopiesFromId(Id).Where(x => x.Status == false);
+        }
+        // Gets all bookCopies From a book
+        public IQueryable<BookCopy> GetAllBookCopiesFromId(int Id)
+        {
+            
+            return _context.BookCopies.Where(x => x.BookId == Id);
         }
 
-        public Book GetFromId(int Id)
+        public Book GetFromId(int? Id)
         {
             return GetAll().FirstOrDefault(x => x.Id == Id);
         }
@@ -30,8 +38,10 @@ namespace LibraryService
         // Adds a new unique book.
         public void AddBook(Book book)
         {
+            var bookCopyService = new LibraryBookCopyService(_context);
             _context.Add(book);
             _context.SaveChanges();
+            bookCopyService.AddBookCopy(book.Id);
         }
 
         // Returns all the unique books in the DB.
@@ -39,7 +49,7 @@ namespace LibraryService
         {
             return _context.Books
                 .Include(x => x.Author)
-                .Include(x => x.BookCopies);
+                .Include(x => x.AvailableBookCopies);
         }
 
         
@@ -60,6 +70,23 @@ namespace LibraryService
                 .Include(x => x.Author);
 
         }
+
+        // Gets all available bookCopies (used when displaying a dropdown in View models)
+        public IQueryable<BookCopy> GetAvailableCopies()
+        {
+
+            return _context.BookCopies.Where(x => x.Status == false)
+                .Include(x => x.Book);
+        }
+
+        // Deletes the specific book
+        public void Delete(int id)
+        {
+            var book = _context.Books.Find(id);
+            _context.Books.Remove(book);
+            _context.SaveChanges();
+        }
+
 
         //public bool IsAvailable(Book book)
         //{

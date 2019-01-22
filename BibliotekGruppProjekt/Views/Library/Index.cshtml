@@ -1,20 +1,21 @@
 ﻿@model BibliotekGruppProjekt.Models.Library.LibraryIndexModel;
 
 <div id="books">
-    <h3>All Books:</h3>
+    <h3>All Books</h3>
     <p>
         <a asp-action="Create">Create New</a>
     </p>
     <a asp-action="Available" class="btn btn-primary">Tillgängliga</a>
 
-    <div id="booksTable">
-        <table>
+    <div id="booksTable" >
+        <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Title: </th>
-                    <th>Author: </th>
-                    <th>Description: </th>
-                    <th>Copies: </th>
+                    <th>Details</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Description</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -30,7 +31,9 @@
                     <td class="">@book.Title</td>
                     <td class="">@book.Author.Name</td>
                     <td class="">@book.Description</td>
-                    <td class="">@book.BookCopies.Count()</td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@book.Id">Delete</a>
+                    </td>
                 </tr>
                 }
             </tbody>

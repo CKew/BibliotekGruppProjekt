@@ -13,6 +13,7 @@ namespace BibliotekGruppProjekt.Models.Library
         public string AuthorName { get; set; }
         public string Description { get; set; }
         public string ISBN { get; set; }
-        public ICollection<BookCopy> BookCopies { get; set; }
+        public IQueryable<BookCopy> BookCopies { get; set; }
+        public IQueryable<BookCopy> AvailableBookCopies { get; set; }
     }
 }

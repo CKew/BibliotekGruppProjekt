@@ -21,6 +21,7 @@ namespace BibliotekGruppProjekt.Controllers
             _loanService = loanService;
         }
 
+        // Gets all the members
         public IActionResult Index()
         {
             var model = new MemberIndexModel();
@@ -30,6 +31,7 @@ namespace BibliotekGruppProjekt.Controllers
             return View(model);
         }
 
+        // Gets details from a specific member
         public IActionResult Detail(int Id)
         {
             var model = new MemberDetailModel();
@@ -44,6 +46,21 @@ namespace BibliotekGruppProjekt.Controllers
             return View(model);
         }
 
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Member member)
+        {
+            if (ModelState.IsValid)
+            {
+                _memberService.AddMember(member);
+                return RedirectToAction(nameof(Index));
+            }
+            return View();
+        }
 
     }
 }

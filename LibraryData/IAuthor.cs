@@ -15,8 +15,9 @@ namespace LibraryData
 
         IEnumerable<SelectListItem> GetSelectListItems();
 
-        Author GetFromId(int Id);
+        Author GetFromId(int? Id);
 
         void AddAuthor(Author author);
+        void Delete(int id);
     }
 }

@@ -15,13 +15,16 @@ namespace BibliotekGruppProjekt.Controllers
     {
         private readonly IBook _bookService;
         private readonly IAuthor _authorService;
+        private readonly IBookCopy _bookCopyService;
 
-        public LibraryController(IBook bookService, IAuthor authorService)
+        public LibraryController(IBook bookService, IAuthor authorService, IBookCopy bookCopyService)
         {
             _bookService = bookService;
             _authorService = authorService;
+            _bookCopyService = bookCopyService;
         }
 
+        // Retrieves all the books and returns them to the view
         public IActionResult Index()
         {
             var model = new LibraryIndexModel() { };
@@ -29,12 +32,10 @@ namespace BibliotekGruppProjekt.Controllers
 
             model.Books = allBooks;
 
-
-
             return View(model);
         }
 
-
+        // Gets all the available books
         public IActionResult Available()
         {
             var model = new LibraryIndexModel();
@@ -44,6 +45,7 @@ namespace BibliotekGruppProjekt.Controllers
             return View(model);
         }
         
+        // Gets information from a specific book and returns it to the view
         public IActionResult Detail(int Id)
         {
             var model = new BookDetailModel();
@@ -54,89 +56,63 @@ namespace BibliotekGruppProjekt.Controllers
             model.ISBN = book.ISBN;
             model.Description = book.Description;
             model.AuthorName = book.Author.Name;
-            model.BookCopies = _bookService.GetAllBookCopies(Id);
+            model.BookCopies = _bookService.GetAllBookCopiesFromId(Id);
+            model.AvailableBookCopies = _bookService.GetAllAvailableBookCopiesFromId(Id);
 
             return View(model);
         }
 
-
-        //public IActionResult Edit(int id)
-        //{
-        //    var book = _bookService.GetBook(id);
-        //    if (book == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(book);
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Edit(int id, Book book)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _bookService.Update(book);
-        //            return RedirectToAction(nameof(Index));
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (_bookService.BookExists(book.ID))
-        //            {
-        //                return NotFound();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
-        //    }
-        //    return View(book);
-        //}
-
-        //public IActionResult Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var book = _bookService.GetBook(id);
-        //    if (book == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(book);
-        //}
-
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult DeleteConfirmed(int id)
-        //{
-        //    _bookService.Delete(id);
-        //    return RedirectToAction(nameof(Index));
-        //}
-
-        //// Author
-
-        /*public IActionResult FilterOnAuthor(int authorId)
+        // Dropdown list of authors
+        public IActionResult Create()
         {
-            var model = new LibraryIndexModel();
-            model.Books = _bookService.GetFromAuthor(authorId);
-            model.Authors = _authorService.GetSelectListItems();
-            
-            return View("Index", model);
+            ViewBag.Authors = _authorService.GetSelectListItems();
+            return View();
+        }
 
-        }*/
+        [HttpPost]
+        public IActionResult Create(Book book)
+        {
+            if (ModelState.IsValid)
+            {
+                _bookService.AddBook(book);
 
-        //public IActionResult Create()
-        //{
-        //    ViewBag.Authors = _authorService.GetSelectListItems();
-        //    return View();
-        //}
+                return RedirectToAction(nameof(Index)); 
+            }
+            else
+            {
+                return View();
+            }
+        }
 
+        // Gets the specific book to delete and returns seperate view
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
+            var book = _bookService.GetFromId(id);
+            if (book == null)
+            {
+                return NotFound();
+            }
+            return View(book);
+        }
+
+        // Confirmation to delete specific book
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            _bookService.Delete(id);
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult AddBookCopy(int Id)
+        {
+            _bookCopyService.AddBookCopy(Id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

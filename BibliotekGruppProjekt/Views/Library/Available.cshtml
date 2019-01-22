@@ -1,14 +1,15 @@
 ﻿@model BibliotekGruppProjekt.Models.Library.LibraryIndexModel;
 
 <div id="books">
-    <h3>Available for Loan: </h3>
+    <h3>Available for Loan</h3>
     <a asp-action="Index" class="btn btn-primary">Alla</a>
     <div id="booksTable">
-        <table>
+        <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Title: </th>
-                    <th>Author: </th>
+                    <th>Details</th>
+                    <th>Title</th>
+                    <th>Author</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,6 +24,7 @@
                         <td><a asp-controller="Library" asp-action="Detail" asp-route-id="@book.Id">(Details)</a></td>
                         <td class="">@book.Title</td>
                         <td class="">@book.Author.Name</td>
+                        
                         
                     </tr>
                 }

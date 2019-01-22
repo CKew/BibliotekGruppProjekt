@@ -9,14 +9,25 @@
             <div class="col-md-4">
                 <div>
                     <h2>@Model.Title</h2>
-                    <table>
-                       <tr>
-                           <td>Author: @Model.AuthorName</td>
-                           <td>Description: @Model.Description</td>
-                           <td>ISBN: @Model.ISBN</td>
-                           <td>BookCopies: @Model.BookCopies.Count()</td>
-                           <td>Book ID: @Model.ID</td>
-                       </tr>
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>Author: @Model.AuthorName</td>
+                            <td>Description: @Model.Description</td>
+                            <td>ISBN: @Model.ISBN</td>
+                            <td>BookCopies: @Model.BookCopies.Count()</td>
+                                @if (Model.AvailableBookCopies.Count() == 0)
+                                {
+                                    <td class="danger">Available BookCopies: @Model.AvailableBookCopies.Count()</td>
+                                }
+                                else
+                                {
+                                    <td class="success">Available BookCopies: @Model.AvailableBookCopies.Count()</td>
+                                }
+
+                            <td>Book ID: @Model.ID</td>
+
+                            <td class="alert alert-success">Add Copy: <a asp-action="AddBookCopy" asp-route-Id="@Model.ID"> Click</a></td>
+                        </tr>
                     </table>
                 </div>
             </div>

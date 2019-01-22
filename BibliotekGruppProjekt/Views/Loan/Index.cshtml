@@ -1,14 +1,15 @@
 ﻿@model BibliotekGruppProjekt.Models.Loan.LoanIndexModel
 
 <div id="loans">
-    <h3></h3>
+    <h3>All Loans</h3>
     <p>
         <a asp-action="Create">Create New</a>
     </p>
     <div id="loansTable">
-        <table>
+        <table class="table table-striped">
             <thead>
                 <tr>
+                    <th>Details</th>
                     <th>Member</th>
                     <th>Book</th>
                     <th>Checkout</th>
@@ -30,11 +31,11 @@
                     <td class="">@loan.Checkout</td>
                     @if (loan.Returned == null)
                     {
-                    <td class="">Not Returned.</td>
+                    <td class="danger">Not Returned.</td>
                     }
                     else
                     {
-                    <td class="">@loan.Returned</td>
+                    <td class="success">Returned: @loan.Returned</td>
                     }
                 </tr>
                 }

@@ -1,15 +1,16 @@
 ﻿@model BibliotekGruppProjekt.Models.Author.AuthorIndexModel;
 
 <div id="books">
-    <h3>All Authors:</h3>
+    <h3>All Authors</h3>
     <p>
         <a asp-action="Create">Create New</a>
     </p>
     <div id="booksTable">
-        <table>
+        <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Author: </th>
+                    <th>Details</th>
+                    <th>Author</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,6 +24,9 @@
                         </td>*@
                     <td><a asp-controller="Author" asp-action="Detail" asp-route-id="@author.ID">( Books )</a></td>
                     <td class=""> @author.Name</td>
+                    <td>
+                        <a asp-controller="Author" asp-action="Delete" asp-route-id="@author.ID">Delete</a>
+                    </td>
                 </tr>
                 }
             </tbody>

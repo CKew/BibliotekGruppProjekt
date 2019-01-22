@@ -18,11 +18,13 @@ namespace LibraryService
             _context = context;
         }
 
-        public Author GetFromId(int Id)
+        // Returns the author
+        public Author GetFromId(int? Id)
         {
             return GetAll().FirstOrDefault(x => x.ID == Id);
         }
 
+        // Eager loading books
         public IQueryable<Author> GetAll()
         {
             return _context.Authors
@@ -54,6 +56,14 @@ namespace LibraryService
                        Text = $"{x.Name}",
                        Value = x.ID.ToString()
                    });
+        }
+
+        // Deletes the specific author 
+        public void Delete(int id)
+        {
+            var author = _context.Authors.Find(id);
+            _context.Authors.Remove(author);
+            _context.SaveChanges();
         }
     }
 }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryData.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    [Migration("20190120124549_test")]
-    partial class test
+    [Migration("20190121205257_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -46,7 +46,8 @@ namespace LibraryData.Migrations
 
                     b.Property<string>("ISBN");
 
-                    b.Property<string>("Title");
+                    b.Property<string>("Title")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -82,6 +83,8 @@ namespace LibraryData.Migrations
 
                     b.Property<DateTime>("Checkout");
 
+                    b.Property<int?>("Fees");
+
                     b.Property<int>("MemberId");
 
                     b.Property<DateTime?>("Returned");
@@ -101,7 +104,10 @@ namespace LibraryData.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name");
+                    b.Property<int?>("Fees");
+
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.Property<int>("PersonNr");
 
@@ -121,7 +127,7 @@ namespace LibraryData.Migrations
             modelBuilder.Entity("LibraryData.Models.BookCopy", b =>
                 {
                     b.HasOne("LibraryData.Models.Book", "Book")
-                        .WithMany("BookCopies")
+                        .WithMany("AvailableBookCopies")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

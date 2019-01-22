@@ -12,8 +12,9 @@ namespace LibraryData
 
         IQueryable<Member> GetAll();
         IQueryable<Loan> GetLoansFromId(int memberId);
-
-        Member GetFromId(int Id);
+        IEnumerable<SelectListItem> GetSelectListItems();
+        Member GetFromId(int? Id);
+        int GetIdFromLoan(Loan loan);
 
         void AddMember(Member member);
     }

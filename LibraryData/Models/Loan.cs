@@ -14,7 +14,7 @@ namespace LibraryData.Models
 
         public DateTime? Returned { get; set; }
         
-        public int Fees { get; set; }
+        public int? Fees { get; set; }
 
         [ForeignKey("BookCopy")]
         public int BookCopyId { get; set; }
