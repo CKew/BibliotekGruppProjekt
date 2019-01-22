@@ -21,7 +21,7 @@ namespace LibraryService
         // Used in LoanController to get memberId
         public int GetIdFromLoan(Loan loan)
         {
-            return _context.Members.FirstOrDefault(x => x.ID == loan.MemberId).ID;
+            return _context.Members.FirstOrDefault(x => x.ID == loan.MemberID).ID;
         }
 
         // Eager loading loans
@@ -31,15 +31,15 @@ namespace LibraryService
                 .Include(x => x.Loans);
         }
 
-        public Member GetFromId(int? Id)
+        public Member GetFromId(int? id)
         {
-            return GetAll().FirstOrDefault(x => x.ID == Id);
+            return GetAll().FirstOrDefault(x => x.ID == id);
         }
 
         // Returns all the loans of a specified member.
-        public IQueryable<Loan> GetLoansFromId(int memberId)
+        public IQueryable<Loan> GetLoansFromId(int memberID)
         {
-            var member = GetAll().FirstOrDefault(x => x.ID == memberId);
+            var member = GetAll().FirstOrDefault(x => x.ID == memberID);
 
             var memberLoans = _context.Loans.Where(x => x.Member == member)
                 .Include(x => x.BookCopy.Book);

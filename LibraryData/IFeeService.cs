@@ -7,6 +7,6 @@ namespace LibraryData
 {
     public interface IFeeService
     {
-        TimeSpan DaysLoaned(int Id);
+        TimeSpan DaysLoaned(int id);
     }
 }

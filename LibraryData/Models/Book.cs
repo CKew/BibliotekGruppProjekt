@@ -8,7 +8,7 @@ namespace LibraryData.Models
 {
     public class Book
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
 
         [Required]
         public string Title { get; set; }
@@ -21,7 +21,7 @@ namespace LibraryData.Models
 
         [Required]
         [ForeignKey("Author")]
-        public int AuthorId { get; set; }
+        public int AuthorID { get; set; }
         public virtual Author Author { get; set; }
 
     }

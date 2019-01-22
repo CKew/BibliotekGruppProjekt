@@ -10,12 +10,12 @@ namespace LibraryData
     public interface IAuthorService
     {
         IQueryable<Author> GetAll();
-        
-        IQueryable<Book> GetAllBooksFromAuthor(int authorId);
+
+        IQueryable<Book> GetAllBooksFromAuthor(int authorID);
 
         IEnumerable<SelectListItem> GetSelectListItems();
 
-        Author GetFromId(int? Id);
+        Author GetFromId(int? id);
 
         void AddAuthor(Author author);
         void Delete(int id);

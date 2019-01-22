@@ -27,13 +27,11 @@ namespace LibraryService
             _context.Add(loan);
             _bookCopyService.SetStatusToTrue(loan);
             _context.SaveChanges();
-
-            
         }
 
-        public Loan GetFromId(int Id)
+        public Loan GetFromId(int id)
         {
-            return GetAll().FirstOrDefault(x => x.ID == Id);
+            return GetAll().FirstOrDefault(x => x.ID == id);
         }
 
         // Returns all the loans.
@@ -45,21 +43,21 @@ namespace LibraryService
         }
 
         // Returns all the loans from a specified member.
-        public Loan GetFromMemberId(int? memberId)
+        public Loan GetFromMemberId(int? memberID)
         {
-            var member = _context.Members.FirstOrDefault(x => x.ID == memberId);
+            var member = _context.Members.FirstOrDefault(x => x.ID == memberID);
 
             return _context.Loans.FirstOrDefault(x => x.Member == member);
 
         }
         
         // Returns a loan from a specified member and book and removes it from the database. sets the bookCopy.Status == false;
-        public void ReturnLoan(int Id)
+        public void ReturnLoan(int id)
         {
-            var loan = _context.Loans.FirstOrDefault(x => x.ID == Id);
+            var loan = _context.Loans.FirstOrDefault(x => x.ID == id);
             loan.Returned = DateTime.Now;
 
-            var member = _context.Members.FirstOrDefault(x => x.ID == loan.MemberId);
+            var member = _context.Members.FirstOrDefault(x => x.ID == loan.MemberID);
 
             member.Fees = loan.Fees + member.Fees;
 
@@ -69,14 +67,14 @@ namespace LibraryService
             _context.SaveChanges();
         }
 
-        public string GetBookTitle(int Id)
+        public string GetBookTitle(int id)
         {
-            return GetAll().FirstOrDefault(x => x.ID == Id).BookCopy.Book.Title;
+            return GetAll().FirstOrDefault(x => x.ID == id).BookCopy.Book.Title;
         }
 
-        public string GetMemberName(int Id)
+        public string GetMemberName(int id)
         {
-            return GetAll().FirstOrDefault(x => x.ID == Id).Member.Name;
+            return GetAll().FirstOrDefault(x => x.ID == id).Member.Name;
         }
 
 

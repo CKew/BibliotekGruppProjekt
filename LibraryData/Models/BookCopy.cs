@@ -7,10 +7,10 @@ namespace LibraryData.Models
 {
     public class BookCopy
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
 
         [ForeignKey("Book")]
-        public int BookId { get; set; }
+        public int BookID { get; set; }
         public virtual Book Book { get; set; }
 
         public bool Status { get; set; }

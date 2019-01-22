@@ -5,10 +5,10 @@ using System.Text;
 
 namespace LibraryData
 {
-    public interface IBookCopy
+    public interface IBookCopyService
     {
-        IEnumerable<BookCopy> GetCopies(int bookId);
-        
-        void AddBookCopy(int Id);
+        IEnumerable<BookCopy> GetCopies(int bookID);
+
+        void AddBookCopy(int id);
     }
 }

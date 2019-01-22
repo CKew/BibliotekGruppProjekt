@@ -1,5 +1,4 @@
 ﻿@model BibliotekGruppProjekt.Models.Member.MemberDetailModel;
-
 <div class="container">
     <div class="header clearfix detailHeading">
         <h2 class="text-muted">Member Information</h2>
@@ -10,7 +9,7 @@
                 <div>
                     <h2>Member: @Model.Name</h2>
                     <div class="memberContact">
-                        @if(@Model.OverdueFees > 0)
+                        @if (@Model.OverdueFees > 0)
                         {
                             <div id="memberHasFees">Current fees due: $@Model.OverdueFees</div>
                         }
@@ -18,16 +17,16 @@
                         {
                             <div id="memberNoFees">No fees currently due.</div>
                         }
-                    <table class="table table-bordered">
-                        <tr>
-                            <td class="">ID = @Model.ID</td>
-                            <td class="">Person Number: @Model.PersonNr</td>
-                            @foreach (var loan in Model.Loans)
-                            {
-                                <td class="">Book on Loan: @loan.BookCopy.Book.Title</td>
-                            }
-                        </tr>
-                    </table>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td class="">ID = @Model.ID</td>
+                                <td class="">Person Number: @Model.PersonNr</td>
+                                @foreach (var loan in Model.Loans)
+                                {
+                                    <td class="">Book on Loan: @loan.BookCopy.Book.Title</td>
+                                }
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>

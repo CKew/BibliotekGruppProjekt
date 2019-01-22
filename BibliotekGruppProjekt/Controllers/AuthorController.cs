@@ -29,20 +29,20 @@ namespace BibliotekGruppProjekt.Controllers
         }
 
         // Gets information from specific author and returns it to the view
-        public IActionResult Detail(int Id)
+        public IActionResult Detail(int id)
         {
             var model = new AuthorDetailModel();
 
-            var author = _authorService.GetFromId(Id);
+            var author = _authorService.GetFromId(id);
 
-            model.ID = Id;
-            model.Books = _authorService.GetAllBooksFromAuthor(Id);
+            model.ID = id;
+            model.Books = _authorService.GetAllBooksFromAuthor(id);
             model.Name = author.Name;
 
             return View(model);
         }
 
-        
+
         public IActionResult Create()
         {
             return View();

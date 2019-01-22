@@ -19,9 +19,9 @@ namespace LibraryService
         }
 
         // Returns the author
-        public Author GetFromId(int? Id)
+        public Author GetFromId(int? id)
         {
-            return GetAll().FirstOrDefault(x => x.ID == Id);
+            return GetAll().FirstOrDefault(x => x.ID == id);
         }
 
         // Eager loading books
@@ -39,9 +39,9 @@ namespace LibraryService
         }
 
         // Returns all the books by a specified author.
-        public IQueryable<Book> GetAllBooksFromAuthor(int authorId)
+        public IQueryable<Book> GetAllBooksFromAuthor(int authorID)
         {
-            var author = GetFromId(authorId);
+            var author = GetFromId(authorID);
 
             return _context.Books.Where(x => x.Author == author);
 

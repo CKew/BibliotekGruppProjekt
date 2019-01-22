@@ -17,9 +17,9 @@ namespace LibraryService
         }
 
         // Checks how many days the book has been loaned and if the book has been delayed
-        public TimeSpan DaysLoaned(int Id)
+        public TimeSpan DaysLoaned(int id)
         {
-            var loan = _context.Loans.FirstOrDefault(x => x.ID == Id);
+            var loan = _context.Loans.FirstOrDefault(x => x.ID == id);
 
             var checkoutDate = loan.Checkout;
 

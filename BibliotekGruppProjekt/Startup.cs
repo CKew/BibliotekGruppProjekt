@@ -32,8 +32,8 @@ namespace BibliotekGruppProjekt
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
-            }); 
-            
+            });
+
 
 
             services.AddSingleton(Configuration);
@@ -47,10 +47,10 @@ namespace BibliotekGruppProjekt
 
             services.AddScoped<IAuthorService, AuthorService>();
 
-            services.AddScoped<IBookCopy, BookCopyService>();
+            services.AddScoped<IBookCopyService, BookCopyService>();
 
             services.AddScoped<IFeeService, FeeService>();
-    
+
             services.AddDbContext<LibraryContext>(options
                 => options.UseSqlServer(Configuration.GetConnectionString("LibraryConnection")));
         }

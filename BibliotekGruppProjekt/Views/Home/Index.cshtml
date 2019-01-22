@@ -1,58 +1,57 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
 <div class="row">
     <div class="col-6 col-md-3">
-            <div id="books">
-                <h2>Books</h2>
-            </div>
-            <div>
-                View and manage library books.
-            </div>
-            <div>
-                <a asp-controller="Library" asp-action="Index">
-                    View Books Index
-                </a>
-            </div>
+        <div id="books">
+            <h2>Books</h2>
+        </div>
+        <div>
+            View and manage library books.
+        </div>
+        <div>
+            <a asp-controller="Book" asp-action="Index">
+                View Books Index
+            </a>
+        </div>
     </div>
     <div class="col-6 col-md-3">
-            <div id="loans">
-                <h2>Loans</h2>
-            </div>
-            <div>
-                View and manage library loans.
-            </div>
-            <div>
-                <a asp-controller="Loan" asp-action="Index">
-                    View Loan Index
-                </a>
-            </div>
+        <div id="loans">
+            <h2>Loans</h2>
+        </div>
+        <div>
+            View and manage library loans.
+        </div>
+        <div>
+            <a asp-controller="Loan" asp-action="Index">
+                View Loan Index
+            </a>
+        </div>
     </div>
     <div class="col-6 col-md-3">
-            <div id="members">
-                <h2>Members</h2>
-            </div>
-            <div>
-                View and manage members.
-            </div>
-            <div>
-                <a asp-controller="Member" asp-action="Index">
-                    View Members Index
-                </a>
-            </div>
+        <div id="members">
+            <h2>Members</h2>
+        </div>
+        <div>
+            View and manage members.
+        </div>
+        <div>
+            <a asp-controller="Member" asp-action="Index">
+                View Members Index
+            </a>
+        </div>
     </div>
     <div class="col-6 col-md-3">
-            <div id="authors">
-                <h2>Authors</h2>
-            </div>
-            <div>
-                View and manage authors.
-            </div>
-            <div>
-                <a asp-controller="Author" asp-action="Index">
-                    View Author Index
-                </a>
-            </div>
+        <div id="authors">
+            <h2>Authors</h2>
+        </div>
+        <div>
+            View and manage authors.
+        </div>
+        <div>
+            <a asp-controller="Author" asp-action="Index">
+                View Author Index
+            </a>
+        </div>
     </div>
 </div>

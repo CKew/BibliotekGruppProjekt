@@ -1,4 +1,4 @@
-﻿using BibliotekGruppProjekt.Models.Library;
+﻿using BibliotekGruppProjekt.Models.Books;
 using LibraryData;
 using LibraryData.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace BibliotekGruppProjekt.Controllers
 {
-    public class LibraryController : Controller
+    public class BookController : Controller
     {
         private readonly IBookService _bookService;
         private readonly IAuthorService _authorService;
-        private readonly IBookCopy _bookCopyService;
+        private readonly IBookCopyService _bookCopyService;
 
-        public LibraryController(IBookService bookService, IAuthorService authorService, IBookCopy bookCopyService)
+        public BookController(IBookService bookService, IAuthorService authorService, IBookCopyService bookCopyService)
         {
             _bookService = bookService;
             _authorService = authorService;
@@ -27,7 +27,7 @@ namespace BibliotekGruppProjekt.Controllers
         // Retrieves all the books and returns them to the view
         public IActionResult Index()
         {
-            var model = new LibraryIndexModel() { };
+            var model = new BookIndexModel() { };
             var allBooks = _bookService.GetAll();
 
             model.Books = allBooks;
@@ -38,26 +38,26 @@ namespace BibliotekGruppProjekt.Controllers
         // Gets all the available books
         public IActionResult Available()
         {
-            var model = new LibraryIndexModel();
+            var model = new BookIndexModel();
 
             model.Books = _bookService.GetAvailable();
 
             return View(model);
         }
-        
+
         // Gets information from a specific book and returns it to the view
-        public IActionResult Detail(int Id)
+        public IActionResult Detail(int id)
         {
             var model = new BookDetailModel();
 
-            var book = _bookService.GetFromId(Id);
-            model.ID = Id;
+            var book = _bookService.GetFromId(id);
+            model.ID = id;
             model.Title = book.Title;
             model.ISBN = book.ISBN;
             model.Description = book.Description;
             model.AuthorName = book.Author.Name;
-            model.BookCopies = _bookService.GetAllBookCopiesFromId(Id);
-            model.AvailableBookCopies = _bookService.GetAllAvailableBookCopiesFromId(Id);
+            model.BookCopies = _bookService.GetAllBookCopiesFromId(id);
+            model.AvailableBookCopies = _bookService.GetAllAvailableBookCopiesFromId(id);
 
             return View(model);
         }
@@ -76,7 +76,7 @@ namespace BibliotekGruppProjekt.Controllers
             {
                 _bookService.AddBook(book);
 
-                return RedirectToAction(nameof(Index)); 
+                return RedirectToAction(nameof(Index));
             }
             else
             {
@@ -109,9 +109,9 @@ namespace BibliotekGruppProjekt.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult AddBookCopy(int Id)
+        public IActionResult AddBookCopy(int id)
         {
-            _bookCopyService.AddBookCopy(Id);
+            _bookCopyService.AddBookCopy(id);
             return RedirectToAction(nameof(Index));
         }
     }

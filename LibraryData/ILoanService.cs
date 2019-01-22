@@ -10,15 +10,15 @@ namespace LibraryData
     public interface ILoanService
     {
         IQueryable<Loan> GetAll();
-        Loan GetFromMemberId(int? memberId);
+        Loan GetFromMemberId(int? memberID);
 
         void AddLoan(Loan loan);
-        void ReturnLoan(int Id);
+        void ReturnLoan(int id);
 
-        Loan GetFromId(int Id);
+        Loan GetFromId(int id);
 
-        string GetMemberName(int Id);
-        string GetBookTitle(int Id);
+        string GetMemberName(int id);
+        string GetBookTitle(int id);
 
     }
 }

@@ -24,12 +24,12 @@ INSERT INTO Members VALUES
 (970615, 'Jakob', null);
 
 INSERT INTO Loans VALUES 
-('01/11/2019 16:53', null, null, 2, 1),
-('01/15/2019 13:43', null, null, 4, 2),
-('01/09/2019 15:33', null, null, 6, 3); 
+('01/11/2019 16:53', null, null, 2, 1, 0),
+('01/15/2019 13:43', null, null, 4, 2, 0),
+('01/05/2019 15:33', null, null, 6, 3, 1); 
 
 SELECT * FROM Authors
-SELECT* FROM BookCopies
+SELECT * FROM BookCopies
 SELECT * FROM Books
 SELECT * FROM Loans
 SELECT * FROM Members
@@ -39,7 +39,6 @@ SELECT * FROM Members
 Kommentera och Finslipa all kod.
 
 Converta int till string i vissa entities
-Ändra Library Till book
 
 Gå igenom powerpoint och kolla Best Practices
 

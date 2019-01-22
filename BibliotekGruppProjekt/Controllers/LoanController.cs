@@ -31,8 +31,6 @@ namespace BibliotekGruppProjekt.Controllers
         {
             var allLoans = _loanService.GetAll();
 
-            
-
             var model = new LoanIndexModel();
             model.Loans = allLoans;
 
@@ -40,21 +38,20 @@ namespace BibliotekGruppProjekt.Controllers
         }
 
         // Details about a specific loan
-        public IActionResult Detail(int Id)
+        public IActionResult Detail(int id)
         {
-            var loan = _loanService.GetFromId(Id);
+            var loan = _loanService.GetFromId(id);
 
-            var timeSinceLoaned = _feeService.DaysLoaned(Id);
+            var timeSinceLoaned = _feeService.DaysLoaned(id);
 
             var model = new LoanDetailModel();
-            model.ID = Id;
-            model.BookTitle = _loanService.GetBookTitle(Id);
-            model.MemberName = _loanService.GetMemberName(Id);
+            model.ID = id;
+            model.BookTitle = _loanService.GetBookTitle(id);
+            model.MemberName = _loanService.GetMemberName(id);
             model.Checkout = loan.Checkout;
             model.Returned = loan.Returned;
-            model.MemberId = _memberService.GetIdFromLoan(loan);
+            model.MemberID = _memberService.GetIdFromLoan(loan);
             model.TimeSpan = timeSinceLoaned.ToString("%d");
-            
 
             return View(model);
 
@@ -64,7 +61,7 @@ namespace BibliotekGruppProjekt.Controllers
         public IActionResult Create()
         {
             ViewBag.Members = _memberService.GetSelectListItems();
-            ViewBag.BookCopies = new SelectList(_bookService.GetAvailableCopies(), "Id", "Book.Title");
+            ViewBag.BookCopies = new SelectList(_bookService.GetAvailableCopies(), "ID", "Book.Title");
             return View();
         }
 
@@ -84,11 +81,11 @@ namespace BibliotekGruppProjekt.Controllers
         }
 
         // Returns the loan
-        public IActionResult Return(int Id)
+        public IActionResult Return(int id)
         {
             if (ModelState.IsValid)
             {
-                _loanService.ReturnLoan(Id);
+                _loanService.ReturnLoan(id);
 
                 var model = new LoanIndexModel();
                 model.Loans = _loanService.GetAll();

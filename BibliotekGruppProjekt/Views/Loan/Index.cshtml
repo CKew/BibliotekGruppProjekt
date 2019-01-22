@@ -1,5 +1,4 @@
 ﻿@model BibliotekGruppProjekt.Models.Loan.LoanIndexModel
-
 <div id="loans">
     <h3>All Loans</h3>
     <p>
@@ -19,30 +18,25 @@
             <tbody>
                 @foreach (var loan in Model.Loans)
                 {
-                <tr class="loanrow">
-                    @*<td class="loanrow">
-                            <a asp-controller="Loan" asp-action=">Index" asp-route-id="@loan.ID">
+                    <tr class="loanrow">
+                        <td><a asp-controller="Loan" asp-action="Detail" asp-route-id="@loan.ID">(Details)</a></td>
+                        <td class="">@loan.Member.Name</td>
+                        <td class="">@loan.BookCopy.Book.Title</td>
+                        <td class="">@loan.Checkout</td>
+                        @if (loan.Returned == null && loan.Delayed == true)
+                        {
+                            <td class="danger">Delayed. Fees Due: @loan.Fees kr</td>
+                        }
+                        else if (loan.Returned == null)
+                        {
+                            <td class="danger">Not Returned.</td>
+                        }
+                        else
+                        {
+                            <td class="success">Returned: @loan.Returned</td>
+                        }
 
-                            </a>
-                        </td>*@
-                    <td><a asp-controller="Loan" asp-action="Detail" asp-route-id="@loan.ID">(Details)</a></td>
-                    <td class="">@loan.Member.Name</td>
-                    <td class="">@loan.BookCopy.Book.Title</td>
-                    <td class="">@loan.Checkout</td>
-                    @if(loan.Returned == null && loan.Delayed == true)
-                    {
-                    <td class="danger">Delayed. Fees Due: @loan.Fees kr</td>
-                    }
-                    else if (loan.Returned == null)
-                    {
-                    <td class="danger">Not Returned.</td>
-                    }
-                    else
-                    {
-                    <td class="success">Returned: @loan.Returned</td>
-                    }
-                    
-                </tr>
+                    </tr>
                 }
             </tbody>
         </table>

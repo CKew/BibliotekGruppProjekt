@@ -9,11 +9,10 @@ namespace LibraryData
 {
     public interface IMemberService
     {
-
         IQueryable<Member> GetAll();
-        IQueryable<Loan> GetLoansFromId(int memberId);
+        IQueryable<Loan> GetLoansFromId(int memberID);
         IEnumerable<SelectListItem> GetSelectListItems();
-        Member GetFromId(int? Id);
+        Member GetFromId(int? id);
         int GetIdFromLoan(Loan loan);
 
         void AddMember(Member member);

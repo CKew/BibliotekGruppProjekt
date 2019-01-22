@@ -32,15 +32,15 @@ namespace BibliotekGruppProjekt.Controllers
         }
 
         // Gets details from a specific member
-        public IActionResult Detail(int Id)
+        public IActionResult Detail(int id)
         {
             var model = new MemberDetailModel();
-            var member = _memberService.GetFromId(Id);
-            model.ID = Id;
-            model.Loans = _memberService.GetLoansFromId(Id);
+            var member = _memberService.GetFromId(id);
+            model.ID = id;
+            model.Loans = _memberService.GetLoansFromId(id);
             model.Name = member.Name;
             model.PersonNr = member.PersonNr;
-            
+
             //model.OverdueFees = member.OverdueFees;
 
             return View(model);

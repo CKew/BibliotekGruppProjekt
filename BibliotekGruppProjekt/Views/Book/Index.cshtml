@@ -1,8 +1,10 @@
-﻿@model BibliotekGruppProjekt.Models.Library.LibraryIndexModel;
-
+﻿@model BibliotekGruppProjekt.Models.Books.BookIndexModel;
 <div id="books">
-    <h3>Available for Loan</h3>
-    <a asp-action="Index" class="btn btn-primary">Alla</a>
+    <h3>All Books</h3>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <a asp-action="Available" class="btn btn-primary">Tillgängliga</a>
     <div id="booksTable">
         <table class="table table-striped">
             <thead>
@@ -10,26 +12,24 @@
                     <th>Details</th>
                     <th>Title</th>
                     <th>Author</th>
+                    <th>Description</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var book in Model.Books)
                 {
                     <tr class="bookrow">
-                        @*<td class="loanrow">
-                                <a asp-controller="Loan" asp-action=">Index" asp-route-id="@loan.ID">
-
-                                </a>
-                            </td>*@
-                        <td><a asp-controller="Library" asp-action="Detail" asp-route-id="@book.Id">(Details)</a></td>
+                        <td><a asp-controller="Book" asp-action="Detail" asp-route-id="@book.ID">(Details)</a></td>
                         <td class="">@book.Title</td>
                         <td class="">@book.Author.Name</td>
-                        
-                        
+                        <td class="">@book.Description</td>
+                        <td>
+                            <a asp-action="Delete" asp-route-id="@book.ID">Delete</a>
+                        </td>
                     </tr>
                 }
             </tbody>
         </table>
     </div>
 </div>
-

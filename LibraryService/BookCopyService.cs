@@ -7,7 +7,7 @@ using LibraryData.Models;
 
 namespace LibraryService
 {
-    public class BookCopyService : IBookCopy
+    public class BookCopyService : IBookCopyService
     {
         private LibraryContext _context;
 
@@ -17,10 +17,10 @@ namespace LibraryService
         }
 
         // Adds a new copy of an existing book.
-        public void AddBookCopy(int Id)
+        public void AddBookCopy(int id)
         {
             var bookCopy = new BookCopy() {
-                BookId = Id,
+                BookID = id,
                 
             };
 
@@ -30,22 +30,22 @@ namespace LibraryService
 
         public void SetStatusToTrue(Loan loan)
         {
-           var bookCopy = _context.BookCopies.FirstOrDefault(x => x.Id == loan.BookCopyId);
+           var bookCopy = _context.BookCopies.FirstOrDefault(x => x.ID == loan.BookCopyID);
             bookCopy.Status = true;
             _context.SaveChanges();
         }
 
         public void SetStatusToFalse(Loan loan)
         {
-            var bookCopy = _context.BookCopies.FirstOrDefault(x => x.Id == loan.BookCopyId);
+            var bookCopy = _context.BookCopies.FirstOrDefault(x => x.ID == loan.BookCopyID);
             bookCopy.Status = false;
             _context.SaveChanges();
         }
 
         // Returns all the copies of a book.
-        public IEnumerable<BookCopy> GetCopies(int bookId)
+        public IEnumerable<BookCopy> GetCopies(int bookID)
         {
-            var book = _context.Books.FirstOrDefault(x => x.Id == bookId);
+            var book = _context.Books.FirstOrDefault(x => x.ID == bookID);
 
             var bookCopies = _context.BookCopies.Where(x => x.Book == book);
 

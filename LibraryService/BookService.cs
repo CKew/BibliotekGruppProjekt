@@ -19,20 +19,20 @@ namespace LibraryService
         }
 
         // Gets all the available bookcopies from a book
-        public IQueryable<BookCopy> GetAllAvailableBookCopiesFromId(int Id)
+        public IQueryable<BookCopy> GetAllAvailableBookCopiesFromId(int id)
         {
-            return GetAllBookCopiesFromId(Id).Where(x => x.Status == false);
+            return GetAllBookCopiesFromId(id).Where(x => x.Status == false);
         }
         // Gets all bookCopies From a book
-        public IQueryable<BookCopy> GetAllBookCopiesFromId(int Id)
+        public IQueryable<BookCopy> GetAllBookCopiesFromId(int id)
         {
             
-            return _context.BookCopies.Where(x => x.BookId == Id);
+            return _context.BookCopies.Where(x => x.BookID == id);
         }
 
-        public Book GetFromId(int? Id)
+        public Book GetFromId(int? id)
         {
-            return GetAll().FirstOrDefault(x => x.Id == Id);
+            return GetAll().FirstOrDefault(x => x.ID == id);
         }
 
         // Adds a new unique book.
@@ -41,7 +41,7 @@ namespace LibraryService
             var bookCopyService = new BookCopyService(_context);
             _context.Add(book);
             _context.SaveChanges();
-            bookCopyService.AddBookCopy(book.Id);
+            bookCopyService.AddBookCopy(book.ID);
         }
 
         // Returns all the unique books in the DB.
@@ -54,9 +54,9 @@ namespace LibraryService
 
         
         // Gets all the books from a specific author
-        public IEnumerable<Book> GetFromAuthor(int authorId)
+        public IEnumerable<Book> GetFromAuthor(int authorID)
         {
-            var author = _context.Authors.FirstOrDefault(x => x.ID == authorId);
+            var author = _context.Authors.FirstOrDefault(x => x.ID == authorID);
 
             return _context.Books.Where(x => x.Author == author);
 
@@ -86,12 +86,5 @@ namespace LibraryService
             _context.Books.Remove(book);
             _context.SaveChanges();
         }
-
-
-        //public bool IsAvailable(Book book)
-        //{
-        //    var availableBookCopies = _context.BookCopies.Where(x => x.Status == false);
-        //    var availableBooks = _context.Books.Where(x => x.BookCopies.)
-        //}
     }
 }

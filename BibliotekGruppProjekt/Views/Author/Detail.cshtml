@@ -1,6 +1,5 @@
 ﻿@model BibliotekGruppProjekt.Models.Author.AuthorDetailModel
 
-
 <h3>@Model.Name</h3>
 <div id="authorDetail">
     <table class="table table-striped">
@@ -10,17 +9,13 @@
             </tr>
         </thead>
         <tbody>
-
             <tr>
-                
                 @foreach (var book in Model.Books)
                 {
                     <th>@book.Title</th>
-                    
+
                 }
-                
             </tr>
-            
         </tbody>
     </table>
-    </div>
+</div>

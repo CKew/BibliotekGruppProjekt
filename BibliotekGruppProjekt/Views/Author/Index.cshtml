@@ -17,11 +17,6 @@
                 @foreach (var author in Model.Authors)
                 {
                 <tr class="bookrow">
-                    @*<td class="loanrow">
-                            <a asp-controller="Loan" asp-action=">Index" asp-route-id="@loan.ID">
-
-                            </a>
-                        </td>*@
                     <td><a asp-controller="Author" asp-action="Detail" asp-route-id="@author.ID">(Books)</a></td>
                     <td class=""> @author.Name</td>
                     <td>
