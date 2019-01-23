@@ -13,7 +13,9 @@
                 <th>Profile Link</th>
                 <th>Name</th>
                 <th>PersonNr</th>
+                <th>Number of loans</th>
                 <th>Overdue Fees</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -23,6 +25,7 @@
                     <td><a asp-controller="Member" asp-action="Detail" asp-route-id="@member.ID">(Profile)</a></td>
                     <td>@member.Name</td>
                     <td>@member.PersonNr</td>
+                    <td>@member.Loans.Count()</td>
                     @if (member.Fees == null || member.Fees == 0)
                     {
                         <td class="success">No Fees Due.</td>
@@ -30,8 +33,9 @@
                     else
                     {
 
-                        <td class="danger">@member.Fees</td>
+                        <td class="danger">Fees: @member.Fees Kr</td>
                     }
+                    <td><a asp-action="Delete" asp-route-id="@member.ID">Delete</a></td>
                 </tr>
             }
         </tbody>

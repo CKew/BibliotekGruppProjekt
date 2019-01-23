@@ -1,8 +1,4 @@
-﻿using LibraryData.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 
 namespace BibliotekGruppProjekt.Models.Member
@@ -11,7 +7,7 @@ namespace BibliotekGruppProjekt.Models.Member
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public int PersonNr { get; set; }
+        public string PersonNr { get; set; }
         public decimal OverdueFees { get; set; }
         public IEnumerable<LibraryData.Models.Loan> Loans { get; set; }
     }

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace LibraryData.Models
@@ -9,6 +7,7 @@ namespace LibraryData.Models
     {
         public int ID { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
         public virtual ICollection<Book> Books { get; set; }

@@ -1,13 +1,8 @@
 ﻿using BibliotekGruppProjekt.Models.Loan;
 using LibraryData;
 using LibraryData.Models;
-using LibraryService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BibliotekGruppProjekt.Controllers
 {
@@ -40,7 +35,7 @@ namespace BibliotekGruppProjekt.Controllers
         // Details about a specific loan
         public IActionResult Detail(int id)
         {
-            var loan = _loanService.GetFromId(id);
+            var loan = _loanService.GetFromID(id);
 
             var timeSinceLoaned = _feeService.DaysLoaned(id);
 
@@ -50,17 +45,18 @@ namespace BibliotekGruppProjekt.Controllers
             model.MemberName = _loanService.GetMemberName(id);
             model.Checkout = loan.Checkout;
             model.Returned = loan.Returned;
-            model.MemberID = _memberService.GetIdFromLoan(loan);
+            model.MemberID = _memberService.GetIDFromLoan(loan);
             model.TimeSpan = timeSinceLoaned.ToString("%d");
 
             return View(model);
 
         }
+
         // Dropdown menu of members and bookcopies
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Members = _memberService.GetSelectListItems();
+            ViewBag.Members = new SelectList(_memberService.GetAll(), "ID", "Name"); 
             ViewBag.BookCopies = new SelectList(_bookService.GetAvailableCopies(), "ID", "Book.Title");
             return View();
         }
@@ -97,27 +93,6 @@ namespace BibliotekGruppProjekt.Controllers
             {
                 return NotFound();
             }
-        }
-
-
-        public IActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            var loan = _loanService.GetFromMemberId(id);
-            if (loan == null)
-            {
-                return NotFound();
-            }
-            return View(loan);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        public IActionResult DeleteConfirmed(int id)
-        {
-            return View();
         }
     }
 }

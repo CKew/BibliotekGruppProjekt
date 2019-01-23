@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace LibraryData.Models
@@ -9,7 +7,9 @@ namespace LibraryData.Models
     {
         public int ID { get; set; }
 
-        public int PersonNr { get; set; }
+        [Required]
+        [RegularExpression(@"^[0-9\s]{10,12}$", ErrorMessage = " must be a number and between 10-12 characters")]
+        public string PersonNr { get; set; }
 
         [Required]
         public string Name { get; set; }

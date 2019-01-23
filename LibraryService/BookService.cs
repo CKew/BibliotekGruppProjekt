@@ -1,11 +1,8 @@
 ﻿using LibraryData;
 using LibraryData.Models;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace LibraryService
 {
@@ -18,24 +15,13 @@ namespace LibraryService
             _context = context;
         }
 
-        // Gets all the available bookcopies from a book
-        public IQueryable<BookCopy> GetAllAvailableBookCopiesFromId(int id)
-        {
-            return GetAllBookCopiesFromId(id).Where(x => x.Status == false);
-        }
-        // Gets all bookCopies From a book
-        public IQueryable<BookCopy> GetAllBookCopiesFromId(int id)
-        {
-            
-            return _context.BookCopies.Where(x => x.BookID == id);
-        }
-
-        public Book GetFromId(int? id)
+        // Gets a book from ID
+        public Book GetFromID(int? id)
         {
             return GetAll().FirstOrDefault(x => x.ID == id);
         }
 
-        // Adds a new unique book.
+        // Adds a new book and adds a bookCopy of it.
         public void AddBook(Book book)
         {
             var bookCopyService = new BookCopyService(_context);
@@ -44,7 +30,7 @@ namespace LibraryService
             bookCopyService.AddBookCopy(book.ID);
         }
 
-        // Returns all the unique books in the DB.
+        // Returns all the books in the DB. Includes Author and BookCopies
         public IEnumerable<Book> GetAll()
         {
             return _context.Books
@@ -52,16 +38,16 @@ namespace LibraryService
                 .Include(x => x.BookCopies);
         }
 
-        
         // Gets all the books from a specific author
         public IEnumerable<Book> GetFromAuthor(int authorID)
         {
             var author = _context.Authors.FirstOrDefault(x => x.ID == authorID);
 
-            return _context.Books.Where(x => x.Author == author);
+            return GetAll().Where(x => x.Author == author);
 
         }
 
+        // Gets all the available books. Includes Author.
         public IEnumerable<Book> GetAvailable()
         {
             var availableBookCopies = _context.BookCopies.Where(x => x.Status == false);
@@ -74,7 +60,6 @@ namespace LibraryService
         // Gets all available bookCopies (used when displaying a dropdown in View models)
         public IQueryable<BookCopy> GetAvailableCopies()
         {
-
             return _context.BookCopies.Where(x => x.Status == false)
                 .Include(x => x.Book);
         }

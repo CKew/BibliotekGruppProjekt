@@ -2,11 +2,6 @@
 using LibraryData;
 using LibraryData.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
 
 namespace BibliotekGruppProjekt.Controllers
 {
@@ -33,7 +28,7 @@ namespace BibliotekGruppProjekt.Controllers
         {
             var model = new AuthorDetailModel();
 
-            var author = _authorService.GetFromId(id);
+            var author = _authorService.GetFromID(id);
 
             model.ID = id;
             model.Books = _authorService.GetAllBooksFromAuthor(id);
@@ -69,7 +64,7 @@ namespace BibliotekGruppProjekt.Controllers
             {
                 return NotFound();
             }
-            var author = _authorService.GetFromId(id);
+            var author = _authorService.GetFromID(id);
             if (author == null)
             {
                 return NotFound();

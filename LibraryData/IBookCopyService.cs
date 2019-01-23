@@ -1,14 +1,16 @@
 ﻿using LibraryData.Models;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace LibraryData
 {
     public interface IBookCopyService
     {
-        IEnumerable<BookCopy> GetCopies(int bookID);
+        IEnumerable<BookCopy> GetCopies(int ID);
+        IQueryable<BookCopy> GetAllBookCopiesFromBookID(int id);
+        IQueryable<BookCopy> GetAllAvailableBookCopiesFromBookID(int id);
 
-        void AddBookCopy(int id);
+
+        void AddBookCopy(int ID);
     }
 }

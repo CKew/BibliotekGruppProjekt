@@ -1,12 +1,7 @@
-﻿using BibliotekGruppProjekt.Models.Loan;
-using BibliotekGruppProjekt.Models.Member;
+﻿using BibliotekGruppProjekt.Models.Member;
 using LibraryData;
 using LibraryData.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BibliotekGruppProjekt.Controllers
 {
@@ -35,13 +30,11 @@ namespace BibliotekGruppProjekt.Controllers
         public IActionResult Detail(int id)
         {
             var model = new MemberDetailModel();
-            var member = _memberService.GetFromId(id);
+            var member = _memberService.GetFromID(id);
             model.ID = id;
-            model.Loans = _memberService.GetLoansFromId(id);
+            model.Loans = _loanService.GetLoansFromMemberID(id);
             model.Name = member.Name;
             model.PersonNr = member.PersonNr;
-
-            //model.OverdueFees = member.OverdueFees;
 
             return View(model);
         }
@@ -62,5 +55,29 @@ namespace BibliotekGruppProjekt.Controllers
             return View();
         }
 
+        // Gets the specific member to delete and returns seperate view
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var book = _memberService.GetFromID(id);
+            if (book == null)
+            {
+                return NotFound();
+            }
+            return View(book);
+        }
+
+        // Confirmation to delete specific member
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            _memberService.Delete(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

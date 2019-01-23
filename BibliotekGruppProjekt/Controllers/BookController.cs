@@ -3,11 +3,6 @@ using LibraryData;
 using LibraryData.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BibliotekGruppProjekt.Controllers
 {
@@ -50,14 +45,14 @@ namespace BibliotekGruppProjekt.Controllers
         {
             var model = new BookDetailModel();
 
-            var book = _bookService.GetFromId(id);
+            var book = _bookService.GetFromID(id);
             model.ID = id;
             model.Title = book.Title;
             model.ISBN = book.ISBN;
             model.Description = book.Description;
             model.AuthorName = book.Author.Name;
-            model.BookCopies = _bookService.GetAllBookCopiesFromId(id);
-            model.AvailableBookCopies = _bookService.GetAllAvailableBookCopiesFromId(id);
+            model.BookCopies = _bookCopyService.GetAllBookCopiesFromBookID(id);
+            model.AvailableBookCopies = _bookCopyService.GetAllAvailableBookCopiesFromBookID(id);
 
             return View(model);
         }
@@ -65,13 +60,15 @@ namespace BibliotekGruppProjekt.Controllers
         // Dropdown list of authors
         public IActionResult Create()
         {
-            ViewBag.Authors = _authorService.GetSelectListItems();
+            ViewBag.Authors = new SelectList(_authorService.GetAll(), "ID", "Name");
             return View();
         }
 
         [HttpPost]
         public IActionResult Create(Book book)
         {
+            ViewBag.Authors = new SelectList(_authorService.GetAll(), "ID", "Name");
+
             if (ModelState.IsValid)
             {
                 _bookService.AddBook(book);
@@ -92,7 +89,7 @@ namespace BibliotekGruppProjekt.Controllers
                 return NotFound();
             }
 
-            var book = _bookService.GetFromId(id);
+            var book = _bookService.GetFromID(id);
             if (book == null)
             {
                 return NotFound();

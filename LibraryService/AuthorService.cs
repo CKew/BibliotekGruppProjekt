@@ -2,10 +2,8 @@
 using LibraryData.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace LibraryService
 {
@@ -19,12 +17,12 @@ namespace LibraryService
         }
 
         // Returns the author
-        public Author GetFromId(int? id)
+        public Author GetFromID(int? id)
         {
             return GetAll().FirstOrDefault(x => x.ID == id);
         }
 
-        // Eager loading books
+        // Getting all the authors. And including books
         public IQueryable<Author> GetAll()
         {
             return _context.Authors
@@ -38,27 +36,16 @@ namespace LibraryService
             _context.SaveChanges();
         }
 
-        // Returns all the books by a specified author.
-        public IQueryable<Book> GetAllBooksFromAuthor(int authorID)
+        // Returns all the books from an author ID.
+        public IQueryable<Book> GetAllBooksFromAuthor(int id)
         {
-            var author = GetFromId(authorID);
+            var author = GetFromID(id);
 
             return _context.Books.Where(x => x.Author == author);
 
         }
-        
-        // Not quite sure what it does. But it makes the items available in the index model. Probably due to eager loading.
-        public IEnumerable<SelectListItem> GetSelectListItems()
-        {
-            return _context.Authors.ToList().OrderBy(x => x.ID).Select(x =>
-                   new SelectListItem
-                   {
-                       Text = $"{x.Name}",
-                       Value = x.ID.ToString()
-                   });
-        }
 
-        // Deletes the specific author 
+        // Deletes an author.
         public void Delete(int id)
         {
             var author = _context.Authors.Find(id);

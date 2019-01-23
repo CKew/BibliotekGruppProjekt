@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using LibraryData;
 using LibraryData.Models;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace LibraryService
 {
@@ -18,7 +16,21 @@ namespace LibraryService
             _context = context;
         }
 
-        // Adds a new loan with a member and bookCopy attatched to it to the Database. Also sets the bookCopy.Status == true.
+        // Returns all the loans. Includes BookCopy.Book and Member
+        public IQueryable<Loan> GetAll()
+        {
+            return _context.Loans
+                .Include(x => x.BookCopy.Book)
+                .Include(x => x.Member);
+        }
+ 
+        // Gets a loan from its ID
+        public Loan GetFromID(int id)
+        {
+            return GetAll().FirstOrDefault(x => x.ID == id);
+        }
+
+        // Adds a new loan. Sets the Datetime to Now and sets the bookcopy status to true.
         public void AddLoan(Loan loan)
         {
             var _bookCopyService = new BookCopyService(_context);
@@ -29,29 +41,16 @@ namespace LibraryService
             _context.SaveChanges();
         }
 
-        public Loan GetFromId(int id)
+        // Returns all the loans from a member.
+        public Loan GetFromMemberID(int? id)
         {
-            return GetAll().FirstOrDefault(x => x.ID == id);
-        }
+            var member = _context.Members.FirstOrDefault(x => x.ID == id);
 
-        // Returns all the loans.
-        public IQueryable<Loan> GetAll()
-        {
-            return _context.Loans
-                .Include(x => x.BookCopy.Book)
-                .Include(x => x.Member);
-        }
-
-        // Returns all the loans from a specified member.
-        public Loan GetFromMemberId(int? memberID)
-        {
-            var member = _context.Members.FirstOrDefault(x => x.ID == memberID);
-
-            return _context.Loans.FirstOrDefault(x => x.Member == member);
+            return GetAll().FirstOrDefault(x => x.Member == member);
 
         }
         
-        // Returns a loan from a specified member and book and removes it from the database. sets the bookCopy.Status == false;
+        // Returns a loan. Sets the return date to Datetime.Now. Sets the fees to the member Fees Property. Sets the bookCopy.Status to false.
         public void ReturnLoan(int id)
         {
             var loan = _context.Loans.FirstOrDefault(x => x.ID == id);
@@ -67,21 +66,26 @@ namespace LibraryService
             _context.SaveChanges();
         }
 
+        // Gets the books title from a loan. (Used in LoanController > DetailModel)
         public string GetBookTitle(int id)
         {
             return GetAll().FirstOrDefault(x => x.ID == id).BookCopy.Book.Title;
         }
 
+        // Gets the member Name from a loan. (Used in LoanController > DetailModel)
         public string GetMemberName(int id)
         {
             return GetAll().FirstOrDefault(x => x.ID == id).Member.Name;
         }
 
+        // Returns all the loans of a specified member. Includes Book
+        public IQueryable<Loan> GetLoansFromMemberID(int id)
+        {
+            var member = _context.Members.FirstOrDefault(x => x.ID == id);
 
+            return GetAll().Where(x => x.Member == member)
+                .Include(x => x.BookCopy.Book);
 
-
-
-
-
+        }
     }
 }
